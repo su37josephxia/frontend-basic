@@ -1,4 +1,4 @@
-# frontend-basic
+doc# frontend-basic
 前端基础知识汇总
 
 ## 大纲
