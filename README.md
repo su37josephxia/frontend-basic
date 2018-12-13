@@ -18,7 +18,7 @@ doc# frontend-basic
 1. 开发环境
     1. IDE
     1. 版本src功能 git
-    1. 模块化(doc/ch11.md)
+    1. [模块化](doc/ch11.md)
 1. 运行环境(doc/ch12.md)
 1. ES6语法
 1. 原型的高级应用
