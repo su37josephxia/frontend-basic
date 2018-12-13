@@ -20,6 +20,14 @@ doc# frontend-basic
     1. 版本src功能 git
     1. 模块化(doc/ch11.md)
 1. 运行环境(doc/ch12.md)
+1. ES6语法
+1. 原型的高级应用
+1. 异步的高级应用
+1. 虚拟DOM
+1. Vue/React
+1. Hybird
+
+
 1. 面试技巧
     - 真实项目经历
     - 博客和开源项目
