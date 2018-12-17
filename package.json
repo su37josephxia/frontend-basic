@@ -1,0 +1,25 @@
+{
+  "name": "frontend-basic",
+  "version": "1.0.0",
+  "description": "doc# frontend-basic 前端基础知识汇总",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/su37josephxia/frontend-basic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/su37josephxia/frontend-basic/issues"
+  },
+  "homepage": "https://github.com/su37josephxia/frontend-basic#readme",
+  "dependencies": {
+    "requirejs": "^2.3.6"
+  }
+}
