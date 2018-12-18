@@ -1,0 +1,29 @@
+<div>
+    <p>你好，<span id='nickName'></span></p>
+    <div id="introduce"></div>
+</div>　
+<script>
+    //视图控制器
+    var data = {};
+    Object.defineProperty(data, "nickName", {
+        get: function () {
+            return document.getElementById('nickName').innerHTML;
+        },
+        set: function (nick) {
+            document.getElementById('nickName').innerHTML = nick;
+        }
+    });
+    Object.defineProperty(data, "introduce", {
+        get: function () {
+            return document.getElementById('introduce').innerHTML;
+        },
+        set: function (introduce) {
+            document.getElementById('introduce').innerHTML = introduce;
+        }
+    });
+
+    //数据
+    //todo 获取用户信息的代码
+    data.nickName = "张无忌";
+    data.introduce = "九阳神功护体"
+</script>

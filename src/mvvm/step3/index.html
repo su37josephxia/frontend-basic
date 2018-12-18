@@ -1,0 +1,39 @@
+<div>
+    <p>你好，<span id='nickName'></span></p>
+    <div id="introduce"></div>
+</div>　
+<script>
+    function Vue(options) {
+        var self = this;
+        this.data = options.data;
+
+        var vm = {}
+        // 设置vm代理
+        Object.keys(this.data).forEach(function (key) {
+            Object.defineProperty(vm, key, {
+                emumerable: false,
+                configurable: true,
+                get: function () {
+                    // return self.data[key];
+                    return document.getElementById(key).innerHTML;
+                },
+                set: function (newVal) {
+                    // self.data[key] = newVal;
+                    document.getElementById(key).innerHTML = newVal;
+                }
+            })
+        })
+
+        // 设置初始值
+        Object.keys(this.data).forEach(function (key) {
+            vm[key] = self.data[key]
+        })
+    }
+
+    new Vue({
+        data: {
+            nickName: "张无忌",
+            introduce: "九阳神功护体"
+        }
+    })
+</script>
