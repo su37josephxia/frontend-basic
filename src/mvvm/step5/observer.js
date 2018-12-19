@@ -85,7 +85,7 @@ Publisher.prototype.setState =function(value){
     this.notice();
 }
 
-//订阅者(也可以认为是Vue中的Watcher)
+//订阅者
 function Subscribe(key) {
     this.key = key
     var self = this

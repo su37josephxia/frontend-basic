@@ -9,7 +9,7 @@ function Vue(options) {
 
     observe(this.data);
     new Compile(options.el, this);
-    options.mounted.all(this)
+    options.mounted.call(this)
 }
 
 Vue.prototype = {
