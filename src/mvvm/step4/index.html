@@ -1,0 +1,36 @@
+<div>
+    <p>我是，<span id='nickName'></span></p>
+    <div id="introduce"></div>
+</div>　
+<script src="index.js"></script>
+<script src="observer.js"></script>
+<script>
+    
+
+    var app = new Vue({
+        data: {
+            nickName: "张无忌",
+            introduce: "九阳神功"
+        }
+    })
+
+    console.log('app', app)
+    var i = 0
+
+    // 模拟动态设定值
+    var interval1 = setInterval(function(){
+        app.introduce = "九阳神功 第" + (i++ % 9 + 1) + "重"
+
+        if(i === 3 ){
+            clearInterval(interval1)
+        }
+    },1000)
+
+    // 模拟动态取值
+    var interval2 = setInterval(function(){
+        console.log(app.introduce)
+        if(i === 3){
+            clearInterval(interval2)
+        }
+    },1500)
+</script>
