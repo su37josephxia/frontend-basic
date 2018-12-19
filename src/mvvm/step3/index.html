@@ -1,23 +1,27 @@
 <div>
-    <p>你好，<span id='nickName'></span></p>
+    <p>我是，<span id='nickName'></span></p>
     <div id="introduce"></div>
 </div>　
 <script>
     function Vue(options) {
         var self = this;
-        this.data = options.data;
+        self.data = options.data;
+        self.vm = {}
 
-        var vm = {}
         // 设置vm代理
-        Object.keys(this.data).forEach(function (key) {
-            Object.defineProperty(vm, key, {
+        Object.keys(self.data).forEach(function (key) {
+            Object.defineProperty(self.vm, key, {
                 emumerable: false,
                 configurable: true,
                 get: function () {
+                    console.log('Do defineProperty getter')
                     // return self.data[key];
                     return document.getElementById(key).innerHTML;
+                    
                 },
                 set: function (newVal) {
+                    console.log('Do defineProperty setter',newVal)
+
                     // self.data[key] = newVal;
                     document.getElementById(key).innerHTML = newVal;
                 }
@@ -25,15 +29,28 @@
         })
 
         // 设置初始值
-        Object.keys(this.data).forEach(function (key) {
-            vm[key] = self.data[key]
+        Object.keys(self.data).forEach(function (key) {
+            self.vm[key] = self.data[key]
         })
     }
 
-    new Vue({
+    var vue = new Vue({
         data: {
             nickName: "张无忌",
-            introduce: "九阳神功护体"
+            introduce: "九阳神功"
         }
     })
+
+    console.log('vue', vue)
+    var i = 0
+
+    // 模拟动态设定值
+    setInterval(function(){
+        vue.vm.introduce = "九阳神功 第" + (++i % 9 + 1) + "重"
+    },1000)
+
+    // 模拟动态取值
+    setInterval(function(){
+        console.log(vue.vm.introduce)
+    },1500)
 </script>
