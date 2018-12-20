@@ -6,6 +6,7 @@ function Compile(el, vm) {
 }
 
 Compile.prototype = {
+
     init: function () {
         if (this.el) {
             this.fragment = this.nodeToFragment(this.el);
@@ -35,7 +36,7 @@ Compile.prototype = {
             var text = node.textContent;
             if (self.isElementNode(node)) {
                 self.compile(node);
-            } 
+            }
             // else if (self.isTextNode(node) && reg.test(text)) {
             //     self.compileText(node, reg.exec(text)[1]);
             // }
@@ -45,52 +46,56 @@ Compile.prototype = {
         })
     },
     compile: function (node) {
-        console.log('compile:', node,node.attributes)
+
+        var publisher = new Publisher()
+
+        console.log('compile:', node, node.attributes)
         var nodeAttrs = node.attributes;
         var self = this;
         Array.prototype.forEach.call(nodeAttrs, function (attr) {
             var attrName = attr.name;
+            if (attr.name === 'id') {
+                var key = node.getAttributeNode(attr.name)
 
-            console.log('attr.name:',attr.name)
-            if(attr.name==='id'){
-                
+                console.log('Compile:', key, self.vm)
+
             }
         })
     },
     isElementNode: function (node) {
-        console.log('nodetype',node.nodeType)
+        console.log('nodetype', node.nodeType)
         return node.nodeType === 1
     },
     // input便签 v-mode
-    compileModel: function (node, vm, exp, dir) {
-        var self = this;
-        var val = this.vm[exp]
-        this.modelUpdater(nade, val);
-        newWatcher(this.vm, exp, function () {
-            self.modelUpdater(node, value)
-        });
-        node.addEventListener('input', function (e) {
-            var newValue = e.target.value;
-            if (val == newValue) {
-                return
-            }
-            self.vm[exp] = newValue;
-            val = newValue;
-        })
-    },
-    compileText: function (node, exp) {
-        var self = this;
-        var initText = this.vm[exp]
-        this.updateText(node, initText);
-        new Watcher(this.vm, exp, function (value) {
-            self.updateText(node, value)
-        })
-    },
-    compileEvent:function(node,vm,exp,dir){
-        var eventType = dir.split(':')[1];
-        // ...
-    }
-,
+    // compileModel: function (node, vm, exp, dir) {
+    //     var self = this;
+    //     var val = this.vm[exp]
+    //     this.modelUpdater(nade, val);
+    //     newWatcher(this.vm, exp, function () {
+    //         self.modelUpdater(node, value)
+    //     });
+    //     node.addEventListener('input', function (e) {
+    //         var newValue = e.target.value;
+    //         if (val == newValue) {
+    //             return
+    //         }
+    //         self.vm[exp] = newValue;
+    //         val = newValue;
+    //     })
+    // },
+    // compileText: function (node, exp) {
+    //     var self = this;
+    //     var initText = this.vm[exp]
+    //     this.updateText(node, initText);
+    //     new Watcher(this.vm, exp, function (value) {
+    //         self.updateText(node, value)
+    //     })
+    // },
+    // compileEvent:function(node,vm,exp,dir){
+    //     var eventType = dir.split(':')[1];
+    //     // ...
+    // }
+    // ,
 
 
 }

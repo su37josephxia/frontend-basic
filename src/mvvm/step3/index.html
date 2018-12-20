@@ -17,15 +17,20 @@
                     console.log('Do defineProperty getter')
                     return self.data[key];
                     return document.getElementById(key).innerHTML;
-                    
+
                 },
                 set: function (newVal) {
-                    console.log('Do defineProperty setter',newVal)
+                    console.log('Do defineProperty setter', newVal)
 
                     self.data[key] = newVal;
                     document.getElementById(key).innerHTML = newVal;
                 }
             })
+        })
+
+        // 设置初始值
+        Object.keys(self.data).forEach(function (key) {
+            self[key] = self.data[key]
         })
 
     }
@@ -41,12 +46,12 @@
     var i = 0
 
     // 模拟动态设定值
-    setInterval(function(){
+    setInterval(function () {
         app.introduce = "九阳神功 第" + (i++ % 9 + 1) + "重"
-    },1000)
+    }, 1000)
 
     // 模拟动态取值
-    setInterval(function(){
+    setInterval(function () {
         console.log(app.introduce)
-    },1500)
+    }, 1500)
 </script>

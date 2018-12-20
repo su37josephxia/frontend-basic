@@ -14,7 +14,6 @@ Observer.prototype = {
     },
     defineReactive: function (data, key, val) {
         var publisher = new Publisher()
-
         publisher.addOb(new Subscribe(key))
 
         Object.defineProperty(data, key, {
@@ -36,7 +35,6 @@ Observer.prototype = {
                 publisher.setState(newVal);
             }
         })
-        console.log('Publisher:', publisher)
     }
 
 }

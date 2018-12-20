@@ -22,13 +22,13 @@
     var i = 0
 
     // 模拟动态设定值
-    // var interval1 = setInterval(function(){
-    //     app.introduce = "九阳神功 第" + (i++ % 9 + 1) + "重"
+    var interval1 = setInterval(function(){
+        app.introduce = "九阳神功 第" + (i++ % 9 + 1) + "重"
 
-    //     if(i === 3 ){
-    //         clearInterval(interval1)
-    //     }
-    // },1000)
+        if(i === 3 ){
+            clearInterval(interval1)
+        }
+    },1000)
 
     // 模拟动态取值
     // var interval2 = setInterval(function(){
