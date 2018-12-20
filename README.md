@@ -27,6 +27,10 @@ doc# frontend-basic
 1. Vue/React
 1. Hybird
 1. [MVVM](doc/ch13.md)
+1. 设计模式
+    1. [观察者模式 - Observer](./src/observer)
+    1. [策略模式 - Strategy](./src/strategy)
+
 
 
 1. 面试技巧
