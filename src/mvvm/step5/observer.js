@@ -14,7 +14,7 @@ Observer.prototype = {
     },
     defineReactive: function (data, key, val) {
         var publisher = new Publisher()
-        publisher.addOb(new Subscribe(key))
+        // publisher.addOb(new Subscribe(key))
 
         Object.defineProperty(data, key, {
             emumerable: false,
@@ -24,6 +24,7 @@ Observer.prototype = {
                 // if (Dep.target) {
                 //     dep.addSub(Dep.target);
                 // }
+                publisher.addOb(new Subscribe(key))
                 return val;
             },
             set: function (newVal) {
@@ -41,7 +42,7 @@ Observer.prototype = {
 
 //发布者
 function Publisher(key) {
-    
+
     this.observers = [];
     this.state = "";
 }
@@ -70,15 +71,15 @@ Publisher.prototype.removeOb = function (observer) {
 }
 
 Publisher.prototype.notice = function () {
-    
-    console.log('Publish notice',this.state)
+
+    console.log('Publish notice', this.state)
     var observers = this.observers;
     for (var i = 0; i < observers.length; i++) {
-        observers[i].update(this.key,this.state);
+        observers[i].update(this.key, this.state);
     };
 }
 
-Publisher.prototype.setState =function(value){
+Publisher.prototype.setState = function (value) {
     this.state = value;
     this.notice();
 }
@@ -87,9 +88,9 @@ Publisher.prototype.setState =function(value){
 function Subscribe(key) {
     this.key = key
     var self = this
-    this.update = function (key,data) {
-        console.log('Subscribe update:', data);
-        document.getElementById(self.key).innerHTML = data;
+    this.update = function (key, data) {
+        console.log('Subscribe update:', data, self.key, document.getElementById(self.key));
+        document.getElementById(self.key) && (document.getElementById(self.key).innerHTML = data);
     };
 }
 

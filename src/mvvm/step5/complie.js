@@ -55,15 +55,16 @@ Compile.prototype = {
         Array.prototype.forEach.call(nodeAttrs, function (attr) {
             var attrName = attr.name;
             if (attr.name === 'id') {
-                var key = node.getAttributeNode(attr.name)
+                var key = node.getAttribute(attr.name)
 
-                console.log('Compile:', key, self.vm)
+                console.log('Compile:', key, self.vm,self.vm[key])
+                self.vm[key] = self.vm.data[key]
 
             }
         })
     },
     isElementNode: function (node) {
-        console.log('nodetype', node.nodeType)
+        // console.log('nodetype', node.nodeType)
         return node.nodeType === 1
     },
     // input便签 v-mode

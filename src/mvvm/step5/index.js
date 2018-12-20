@@ -13,9 +13,9 @@ function Vue(options) {
 
 
     // 设置初始值
-    // Object.keys(self.data).forEach(function (key) {
-    //     self[key] = self.data[key]
-    // })
+    Object.keys(self.data).forEach(function (key) {
+        self[key] = self.data[key]
+    })
 }
 
 Vue.prototype = {
@@ -28,13 +28,11 @@ Vue.prototype = {
                 get: function () {
                     console.log('Do defineProperty getter')
                     return self.data[key];
-                    // return document.getElementById(key).innerHTML;
                     
                 },
                 set: function (newVal) {
                     console.log('Do defineProperty setter',newVal)
                     self.data[key] = newVal;
-                    // document.getElementById(key).innerHTML = newVal;
                 }
             })
         })
