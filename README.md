@@ -27,10 +27,12 @@ doc# frontend-basic
 1. Vue/React
 1. Hybird
 1. [MVVM](doc/ch13.md)
-1. 设计模式
-    1. [观察者模式 - Observer](./src/observer)
-    1. [策略模式 - Strategy](./src/strategy)
-
+1. 设计模式 - 实例讲解
+    1. [单例模式 - Single - 网页弹框(做成中..)]()
+    1. [观察者模式 - Observer - 多对话框内容同步](./src/observer)
+    1. [策略模式 - Strategy - 有效性检查策略](./src/strategy)
+    1. [代理模式 - Proxy- 预加载图片(做成中..)]()
+    - [参考资料](https://blog.csdn.net/song_mou_xia/article/details/80763833)
 
 
 1. 面试技巧
