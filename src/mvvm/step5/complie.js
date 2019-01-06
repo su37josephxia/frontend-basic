@@ -16,6 +16,7 @@ Compile.prototype = {
             console.log('Dom元素不存在')
         }
     },
+
     nodeToFragment: function (el) {
         // 建立代码片段
         var fragment = document.createDocumentFragment()
@@ -27,6 +28,7 @@ Compile.prototype = {
         }
         return fragment
     },
+    
     compileElement: function (el) {
         var childNodes = el.childNodes;
         var self = this;
