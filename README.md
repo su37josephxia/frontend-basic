@@ -1,7 +1,6 @@
 doc# frontend-basic
 前端基础知识汇总
 
-
 ## 大纲
 1. JS基础篇 （ECMA 262标准）
     1. [变量类型和计算](doc/ch01.md)
@@ -23,6 +22,7 @@ doc# frontend-basic
 1. ES6语法
 1. 原型的高级应用
 1. 异步的高级应用
+    1. 流程控制中的是是非非 callback promise generator co async/await
 1. 虚拟DOM
 1. Vue/React
 1. Hybird
