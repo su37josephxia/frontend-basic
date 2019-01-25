@@ -7,6 +7,7 @@ doc# frontend-basic
     1. [原型和原型链](doc/ch02.md)
     1. [作用域和闭包](doc/ch03.md)
     1. [异步和单线程](doc/ch04.md)
+    1.[异常处理](doc/ch18.md)
     1. [其他](doc/ch05.md)
 1. JS Web API (W3C标准)
     1. [DOM操作](doc/ch06.md)
