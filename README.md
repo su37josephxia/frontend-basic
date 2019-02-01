@@ -33,6 +33,7 @@ doc# frontend-basic
     1. [观察者模式 - Observer - 多对话框内容同步](./src/observer)
     1. [策略模式 - Strategy - 有效性检查策略](./src/strategy)
     1. [代理模式 - Proxy- 预加载图片(做成中..)]()
+    1. [Mixin模式 - JS原型链属性复制]
     - [参考资料](https://blog.csdn.net/song_mou_xia/article/details/80763833)
 
 
