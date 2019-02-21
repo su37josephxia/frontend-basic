@@ -9,6 +9,7 @@ doc# frontend-basic
     1. [异步和单线程](doc/ch04.md)
     1.[异常处理](doc/ch18.md)
     1. [其他](doc/ch05.md)
+    1. [其他](doc/this_call_apply_bind_总结.md)
 1. JS Web API (W3C标准)
     1. [DOM操作](doc/ch06.md)
     1. [BOM操作](doc/ch07.md)
