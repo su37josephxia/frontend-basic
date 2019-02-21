@@ -115,9 +115,7 @@ var getName = function(){
 }
 ```
 
- 
-
-　　　　实际上相当于
+​	实际上相当于
 
 ```
 var getName = function(){
@@ -125,13 +123,11 @@ var getName = function(){
 }
 ```
 
- 
-
-　　2. 用来模拟 Function.prototype.bind 指定函数内部的 this 指向
-    
-      **3. 借用其他对象的方法， 可以模拟实现继承**
 
 
+  　　2. 用来模拟 Function.prototype.bind 指定函数内部的 this 指向
+
+　　3. 借用其他对象的方法， 可以模拟实现继承**
 
 ```
  1 var A = function(name){
@@ -148,20 +144,14 @@ var getName = function(){
 12 console.log( b.getName() ); // 输出： 2B铅笔
 ```
 
-
-
- 
-
-　　　　借用 Array.prototype 对象上的方法，对参数列表 arguments 这个类数组对象，进行数组对象方法的调用
+借用 Array.prototype 对象上的方法，对参数列表 arguments 这个类数组对象，进行数组对象方法的调用
 
 ```
 1 (function(){
 2     Array.prototype.push.call( arguments, 3);
 3     console.log( arguments ); // 输出： [1, 2, 3]
-4 })(1, 2);
+4 })(1, 2); 
 ```
-
- 
 
 **三、ECMAScript 5 中的 bind() 方法可以将函数绑定到一个对象上**　　
 
