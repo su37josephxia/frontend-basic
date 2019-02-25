@@ -20,10 +20,10 @@ let promise = (name, delay = 1000) => new Promise(resolve => {
         logTime(name)
     }, delay)
 })
-promise('Promise')
+promise('Promise1')
     .then(() => {
-        promise('Promise')
-    })
+        promise('Promise2')
+    }).then(promise('Promise3'))
 
 // Generator 和 yield 和 iterator
 const generator = function* (name) {
