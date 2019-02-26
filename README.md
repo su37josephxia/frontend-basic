@@ -79,4 +79,4 @@ npx live-server --open=./src
 ![avatar](xmind/interview.jpg)
 
 ## 常用绘图工具总结
-链接(./doc/绘图工具总结.md)
+[链接](./doc/绘图工具总结.md)
