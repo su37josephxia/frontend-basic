@@ -63,7 +63,7 @@
     - 对加班的态度：加班像借钱救急不救穷
     - 谈谈你的缺点：正在学的东西xxx 就说你xxx还不会（网上查的目的就是说客观缺点 不要说主观缺点）
 1. [CommonJS与ES6语法区别](./doc/ch16.md)
-1. [Linux常见命令](./doc/Linux常见命令.md)
+1. [Linux常见命令](./doc/Linux命令.md)
 
 ## 示例代码运行
 - NodeJS 8.0 need https://nodejs.org/en/
