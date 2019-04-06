@@ -57,7 +57,7 @@
     1. [装饰器模式 - 日志记录](https://www.jianshu.com/p/56e41f3533de)
 
     - [参考资料](https://blog.csdn.net/song_mou_xia/article/details/80763833)
-
+1. [Nginx配置](http://www.nginx.cn/doc/index.html)
 
 1. 面试技巧
     - 真实项目经历
