@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx live-server --open=./src"
+    "start": "npx live-server --open=./src",
+    
+    "docs:dev": "vuepress dev doc",
+    "docs:build": "vuepress build doc"
   },
   "repository": {
     "type": "git",
