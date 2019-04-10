@@ -3,5 +3,5 @@ package-lock.json
 npm-debug.log
 .idea/*
 .DS_Store
-./.vuepress/dist/
-./assets/
+doc/.vuepress/dist/
+assets/
