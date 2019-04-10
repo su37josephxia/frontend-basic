@@ -1,5 +1,16 @@
 module.exports = {
+    title: '全栈夏老师',
+    // head: [
+    //     ['link', { rel: 'icon', href: '/logo.png' }]
+    //   ],
+    ga: 'UA-138065799-1',
+    description: '',
     themeConfig: {
+        nav: [
+            { text: '面试宝典', link: '/' },
+            { text: '敏捷实战', link: '/abc' },
+        ],
+        
         sidebar: [
             {
                 title: 'JS基础 （ECMA 262标准）',
@@ -25,7 +36,6 @@ module.exports = {
                     '/ch10.md',
                 ]
             },
-
             {
                 title: 'Linux知识',
                 collapsable: false,
@@ -35,6 +45,7 @@ module.exports = {
             },
             {
                 title: '算法',
+                collapsable: false,
                 children: [['/算法_去重_排序_递归.md', '一道面试题引发的思考']]
             }
         ]
