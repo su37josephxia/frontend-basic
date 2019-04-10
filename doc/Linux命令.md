@@ -42,6 +42,11 @@ scp ~/.ssh/id_rsa.pub root@47.98.252.XXX:/root
 cat id_dsa.pub >> ~/.ssh/authorized_keys
 
 ```
+<video controls="controls" autoplay="autoplay">
+    <source src="../assets/ScreenFlow.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+</video>
+
 
 ### SSH登录
 
