@@ -1,4 +1,4 @@
-# 异常处理
+# 异常处理-error对象
 ## 参考资料
 Javascript异常(exception)处理机制详解 JS、异常Error属性
 

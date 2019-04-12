@@ -7,21 +7,21 @@ module.exports = {
     description: '',
     themeConfig: {
         nav: [
-            { text: '面试宝典', link: '/' },
-            { text: '敏捷实战', link: '/abc' },
+            { text: '面试', link: '/' },
+            // { text: '实战', link: '/abc' },
+            // { text: '鸡汤', link: '/abc' },
         ],
-        
         sidebar: [
             {
                 title: 'JS基础 （ECMA 262标准）',
                 collapsable: true,
                 children: [
-                    '/ch01.md',
-                    '/ch02.md',
-                    '/ch03.md',
-                    '/ch04.md',
-                    '/ch18.md',
-                    '/ch05.md',
+                    '/变量类型和计算.md',
+                    '/原型和原型链.md',
+                    '/异步和单线程.md',
+                    '/异常处理_error对象.md',
+                    '/其他知识.md',
+                    // '/闭包和作用域.md',
                     'this_call_apply_bind_总结.md'
                 ]
             },
@@ -29,18 +29,19 @@ module.exports = {
                 title: 'JS Web API (W3C标准)',
                 collapsable: true,
                 children: [
-                    '/ch06.md',
-                    '/ch07.md',
-                    '/ch08.md',
-                    '/ch09.md',
-                    '/ch10.md',
+                    '/DOM操作.md',
+                    '/BOM操作.md',
+                    '/事件.md',
+                    '/Ajax_XMLHttpRequest.md',
+                    '/存储.md',
                 ]
             },
             {
-                title: 'Linux知识',
+                title: 'DevOps',
                 collapsable: false,
                 children: [
-                    '/Linux命令.md'
+                    '/Linux命令.md',
+                    '/Nginx配置.md'
                 ]
             },
             {

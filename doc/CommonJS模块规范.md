@@ -1,4 +1,4 @@
-# 模块规范
+# CommonJS模块规范
 
 ## CommonJS
 ### 基础

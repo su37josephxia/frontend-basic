@@ -1,4 +1,4 @@
-# defineProperty 的用法详解
+# defineProperty的用法详解
 
 - 句法
 ```
