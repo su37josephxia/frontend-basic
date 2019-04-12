@@ -1,8 +1,6 @@
 # DOM操作
 
-知识点
----
-> DOM本质
+### DOM本质
 
 DOM - DocumentObjectModel
 
@@ -56,8 +54,7 @@ div1.removeChild(child[0])
 
 ```
 
-题目
----
+### 题目
 > DOM是哪种数据结构
 
 树结构

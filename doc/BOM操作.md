@@ -1,7 +1,9 @@
-# BOM操作 - Browse Object Model
+# BOM操作
 
-知识点
----
+> Browse Object Model
+
+### 知识点
+
 > navigator
 ```
     var ua = navigator.userAgent
@@ -27,8 +29,7 @@
 > history
 
 
-题目
----
+### 题目
 > 如何检测浏览器的类型
 ```
     var ua = navigator.userAgent

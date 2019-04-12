@@ -1,5 +1,5 @@
 # 异常处理-error对象
-## 参考资料
+### 参考资料
 Javascript异常(exception)处理机制详解 JS、异常Error属性
 
 ![img](http://o7cqr8cfk.bkt.clouddn.com/17-2-26/45429735-file_1488080174982_10ffe.png)
@@ -76,7 +76,7 @@ Javascript异常(exception)处理机制详解 JS、异常Error属性
 
 ![img](http://o7cqr8cfk.bkt.clouddn.com/17-2-26/59326444-file_1488085488950_15617.png)
 
-## 2.2 抛出自定义类型的错误对象
+### 2.2 抛出自定义类型的错误对象
 
 >  我们不仅仅可以抛出js内置的错误类型的对象，也可以自定义错误类型，然后抛出自定义错误类型的对象。
 >

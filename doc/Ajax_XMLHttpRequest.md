@@ -1,7 +1,6 @@
 # Ajax-XMLHttpRequst
 
-知识点
----
+### 知识点
 > XMLHttpRequest
 ```js
     var xhr = new XMLHttpRequest()
@@ -55,8 +54,7 @@ res.setHeader("Access-Control-Allow-Credentials","true")
 ```
 
 
-题目
----
+### 题目
 > 手动编写一个ajax 不依赖第三方库
 ```js
     var xhr = new XMLHttpRequest()

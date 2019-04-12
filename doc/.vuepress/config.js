@@ -6,6 +6,7 @@ module.exports = {
     ga: 'UA-138065799-1',
     description: '',
     themeConfig: {
+        displayAllHeaders: true,
         nav: [
             { text: '面试', link: '/' },
             // { text: '实战', link: '/abc' },
