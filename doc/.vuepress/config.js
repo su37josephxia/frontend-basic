@@ -11,6 +11,7 @@ module.exports = {
             { text: '面试', link: '/' },
             // { text: '实战', link: '/abc' },
             // { text: '鸡汤', link: '/abc' },
+            { text: 'GitHub', link: 'https://github.com/su37josephxia/frontend-basic' },
         ],
         sidebar: [
             {
