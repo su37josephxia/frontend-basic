@@ -25,5 +25,4 @@ npx live-server --open=./src
 npm i vuepress -g
 npm run vuepress // 开发模式
 npm run docs:build // 编译上传
-
 ```
