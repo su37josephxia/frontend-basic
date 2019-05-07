@@ -25,6 +25,7 @@
   "homepage": "https://github.com/su37josephxia/frontend-basic#readme",
   "dependencies": {
     "co": "^4.6.0",
+    "github-webhook-handler": "^0.7.1",
     "requirejs": "^2.3.6",
     "thunkify": "^2.1.2"
   }

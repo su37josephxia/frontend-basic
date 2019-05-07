@@ -1,5 +1,5 @@
 module.exports = {
-    title: '全栈夏老师',
+    title: '前端大班车',
     // head: [
     //     ['link', { rel: 'icon', href: '/logo.png' }]
     //   ],

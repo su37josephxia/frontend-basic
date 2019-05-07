@@ -1,7 +1,12 @@
 version: '3.1'
 services:
-  ubuntu:
-    image: ubuntu
+  # ubuntu:
+  #   image: ubuntu
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  mongo:
+    image: mongo
+    restart: always
     ports:
-      - 80:80
-      - 443:443
+        - 27017:27017

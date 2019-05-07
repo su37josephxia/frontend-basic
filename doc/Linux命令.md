@@ -48,6 +48,8 @@ cat id_dsa.pub >> ~/.ssh/authorized_keys
 </video> -->
 
 
+<a href="https://scrimba.com/c/cndQdvsp">abc</a>
+
 ### SSH登录
 
 ```bash
