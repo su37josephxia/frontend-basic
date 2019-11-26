@@ -1,0 +1,22 @@
+<script>
+    let data = {
+        foo: 'foo'
+    }
+    let p = new Proxy(data, {
+        get(target, key, receiver) {
+            console.log('get value',target[key])
+            return target[key]
+        },
+        set(target, key, value, receiver) {
+            console.log('set value',target[key],value)
+            console.log('target[key]',target[key])
+            console.log('value',value)
+            target[key] = value // ?
+        }
+    })
+    let i = 0
+    setInterval(() => {
+        p.foo = i++
+    },1000)
+
+</script>

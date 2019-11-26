@@ -1,0 +1,23 @@
+<script>
+    function reactive(data, cb) {
+        let timer = null
+        return new Proxy(data, {
+            get(target, key, receiver) {
+                return Reflect.get(target, key, receiver)
+            },
+            set(target, key, value, receiver) {
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    cb && cb()
+                }, 0);
+                return Reflect.set(target, key, value, receiver)
+            }
+        })
+    }
+
+    let ary = [1, 2]
+    let p = reactive(ary, () => {
+        console.log('trigger')
+    })
+    p.push(3)
+</script>

@@ -1,0 +1,25 @@
+<script>
+    let data = []
+    let p = new Proxy(data, {
+        get(target, key, receiver) {
+            console.log('get value',target[key])
+            // return target[key]
+            return Reflect.get(target, key, receiver)
+        },
+        set(target, key, value, receiver) {
+            console.log('set value',target[key],value)
+            console.log('target[key]',target[key])
+            console.log('value',value)
+            // target[key] = value 
+            // return true
+            return Reflect.set(target, key, value, receiver)
+        }
+    })
+    let i = 0
+    p.push(i)
+    // setInterval(() => {
+    //     console.log('============================')
+    //     p.push(i++)
+    // },1000)
+
+</script>
