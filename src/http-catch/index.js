@@ -6,7 +6,8 @@ const app = new Koa()
 app.use(cache({
     // refresh: '0 0 0 * * ? *', // 每日0点执行
     refresh: '*/10 * * * * *', // 每十秒一次
-    urlPattern: /^\/api\/data\/\w+$/,
+    prefix:'/api/data', // 优先于urlPattern
+    // urlPattern: /^\/api\/data\/\w+$/,
 }))
 const delay = (tick, data) => new Promise(resolve => {
     setTimeout(() => resolve(data), tick)

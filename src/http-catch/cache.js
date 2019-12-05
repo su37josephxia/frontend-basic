@@ -18,9 +18,14 @@ module.exports = (
     return async (ctx, next) => {
         const start = new Date();
         const { url, method } = ctx
+        console.log('index:',url.indexOf(config.prefix))
+        const isNeedCatch = (
+            (config.prefix !== '' && url.indexOf(config.prefix) === 0) ||
+            config.urlPattern.test(url)
+        ) && method === 'GET'
+
         // 判断是否需要缓存
-        if (config.urlPattern.test(url)
-            && method === 'GET') {
+        if (isNeedCatch) {
             const cache = cacheStore[url]
             if (cache) {
                 ctx.body = cacheStore[url]
