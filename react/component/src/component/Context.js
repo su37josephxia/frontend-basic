@@ -1,9 +1,6 @@
 import React from 'react'
 
-const Context = React.createContext()
-
-const Provider = Context.Provider
-const Consumer = Context.Consumer
+const { Provider, Consumer } = React.createContext()
 
 function Child(props) {
     return (
@@ -11,7 +8,7 @@ function Child(props) {
     )
 }
 
-export default class ContextTest extends React.Component {
+export default class Context extends React.Component {
     state = {
         counter: 0
     }

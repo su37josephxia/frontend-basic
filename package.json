@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/su37josephxia/frontend-basic#readme",
   "dependencies": {
+    "antd": "file:react/antd",
     "co": "^4.6.0",
     "github-webhook-handler": "^0.7.1",
     "requirejs": "^2.3.6",

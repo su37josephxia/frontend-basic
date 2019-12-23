@@ -18,10 +18,10 @@ module.exports = (
     return async (ctx, next) => {
         const start = new Date();
         const { url, method } = ctx
-        console.log('index:',url.indexOf(config.prefix))
+        // console.log('index:',url.indexOf(config.prefix))
         const isNeedCatch = (
             (config.prefix !== '' && url.indexOf(config.prefix) === 0) ||
-            config.urlPattern.test(url)
+            config.urlPattern && config.urlPattern.test(url)
         ) && method === 'GET'
 
         // 判断是否需要缓存

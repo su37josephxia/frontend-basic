@@ -1,0 +1,50 @@
+// import React from 'react'
+
+
+
+// const data = [
+//     { stage: 'React', title: '核心API' },
+//     { stage: 'React', title: '组件化1' },
+//     { stage: 'React', title: '组件化2' },
+// ]
+
+// const withContent = (Comp) => (props) => {
+//     const content = data[props.idx]
+//     return <Comp {...content} />
+// }
+
+
+// const withLog = (Comp) => {
+//     return class extends React.Component {
+//         render() {
+//             return <Comp {...this.props}></Comp>
+//         }
+//         componentDidMount() {
+//             console.log('didMount:', this.props)
+//         }
+//     }
+// }
+
+// // @withContent
+// @withLog
+// class MyLesson extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 {/* {this.props['stage']} - {this.props['title']} */}
+//                 {/* {this.props['stage']} */}
+//                 123
+//             </div>
+//         )
+//     }
+// }
+
+// export default function HocTest() {
+//     return (
+//         <div>
+//             {[0, 0, 0].map((item, idx) => (
+//                 <MyLesson key={idx}  ></MyLesson>
+//             ))}
+//         </div>
+//     )
+// }

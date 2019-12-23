@@ -2,24 +2,22 @@ import React from 'react';
 import logo from './logo.svg';
 // import './App.css';
 import Context from './component/Context'
+import Hoc from './component/Hoc'
+import ContextHoc from './component/ContextHoc'
+import Composition from './component/Composition';
+import RadioGroup from './component/RadioGroup';
+import Hooks from './component/Hooks'
+// import HocDecorate from './component/HocDecorate'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-      </header>
-      <Context></Context>
+      {/* <Context/> */}
+      {/* <Hoc/> */}
+      {/* <HocDecorate></HocDecorate> */}
+      {/* <ContextHoc/> */}
+      {/* <Composition/> */}
+      {/* <RadioGroup/> */}
+      {/* <Hooks/> */}
     </div>
   );
 }
