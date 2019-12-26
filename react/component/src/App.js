@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       {/* <Context/> */}
-      {/* <Hoc/> */}
+      <Hoc/>
       {/* <HocDecorate></HocDecorate> */}
       {/* <ContextHoc/> */}
       {/* <Composition/> */}
