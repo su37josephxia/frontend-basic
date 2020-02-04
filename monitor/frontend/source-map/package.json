@@ -1,0 +1,22 @@
+{
+  "name": "source-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.conf123.js",
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.10.2"
+  }
+}
