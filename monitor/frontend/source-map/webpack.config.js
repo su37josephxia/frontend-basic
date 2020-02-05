@@ -3,6 +3,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // dist清理
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// 自动上传Map
+UploadSourceMapWebpackPlugin = require('./plugin/uploadSourceMapWebPackPlugin')
+
+
 
 module.exports = {
   devtool: 'source-map', // SourceMap,
@@ -13,7 +17,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin(),
+    new UploadSourceMapWebpackPlugin({
+      uploadUrl:'http://localhost:7001/monitor/sourcemap',
+      apiKey: 'kaikeba'
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

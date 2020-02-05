@@ -18,6 +18,20 @@ module.exports = appInfo => {
 
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+  // 自定义日志级别
+  config.customLogger = {
+    frontendLogger : {
+      file: path.join(appInfo.root, 'logs/frontend.log')
+    }
+  }
+
+
   path.join(appInfo.baseDir, 'app/public')
 
   // use for cookie sign key, should change to your own and keep security

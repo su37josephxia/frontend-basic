@@ -8,7 +8,7 @@ function uploadError({ lineno, colno, error: { stack }, timeStamp, message,filen
     const str = new Buffer(JSON.stringify(info)).toString("base64");
 
     console.log('str:', str)
-    const host = 'http://localhost:7001/error'
+    const host = 'http://localhost:7001/monitor/error'
     new Image().src = `${host}?info=${str}`
 
 }
@@ -20,10 +20,7 @@ window.addEventListener('error', errorInfo => {
     return true
 }, true)
 
-
-
-
-
 setTimeout(() => {
-    abc(123)
+    abc123(1223)
+    
 }, 1000)

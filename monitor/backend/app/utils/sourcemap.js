@@ -1,12 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { SourceMapConsumer } = require("source-map");
-const sourceMapConfig = {
-  dir: '../../frontend/source-map/dist/'
-}
 const { promisify } = require('util')
-// 检验是否为文件夹
-const notStrictlyIsDir = p => !/\./.test(p);
 
 // 检测manifest文件
 const isManifest = p => /manifest\.json/.test(p);
@@ -43,11 +38,8 @@ const getOriginalPosition = async (sourcemap, line, column) => {
   return parseData
 };
 
-const getOriginSource = async (filename, colno, lineno) => {
-  // const filename = 'bundle.a930d98d0f634a0dfb90.js'
-  const dir = path.resolve(__dirname, sourceMapConfig.dir)
-
-  const mapFile = `${dir}/${filename}.map`
+const getOriginSource = sourceMapPath => async (filename, colno, lineno) => {
+  const mapFile = `${sourceMapPath}/${filename}.map`
   const res = await getOriginalPosition(mapFile, colno, lineno)
   console.log('parse js : ', res)
 }
