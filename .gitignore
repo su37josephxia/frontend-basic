@@ -4,4 +4,3 @@ npm-debug.log
 .idea/*
 .DS_Store
 doc/.vuepress/dist/
-assets/
