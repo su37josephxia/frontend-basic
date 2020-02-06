@@ -7,23 +7,27 @@ const path = require('path')
 
 class MonitorController extends Controller {
   async index() {
+    console.log
     const { ctx } = this;
-    this.getInfo(ctx.query.info)
+    const { info } = ctx.query
+    const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
+    console.log('fronterror:', json)
+    this.ctx.getLogger('frontendLogger').error(json)
     ctx.body = '';
   }
 
   getInfo(info) {
     const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
-    console.log('frontendLogger',json)
+    console.log('frontendLogger', json)
     // 打印前端日志
     this.ctx.getLogger('frontendLogger').error(json)
 
     // 获取source文件名
-    if (json.filename) {
-      const filename = json.filename.slice(json.filename.lastIndexOf('/') + 1)
-      getOriginSource(path.join(this.config.baseDir, 'uploads'))(filename, json.lineno, json.colno)
+    // if (json.filename) {
+    //   const filename = json.filename.slice(json.filename.lastIndexOf('/') + 1)
+    //   getOriginSource(path.join(this.config.baseDir, 'uploads'))(filename, json.lineno, json.colno)
 
-    }
+    // }
 
   }
 

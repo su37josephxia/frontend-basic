@@ -22,7 +22,7 @@
 
 ## 异常收集
 
-### JS异常处理
+### JS异常
 
 js异常的特点是,出现不会导致JS引擎崩溃 最多只会终止当前执行的任务。比如一个页面有两个按钮，如果点击按钮发生异常页面，这个时候页面不会崩溃，只是这个按钮的功能失效，其他按钮还会有效。
 
@@ -267,17 +267,240 @@ window.addEventListener('error', args => {
 }, true);
 ```
 
-
+### webpack工程化
 
 ### Vue
 
+#### handleError
+
+(待...)
+
 ### React
+
+#### componentDidCatch
+
+#### ErrorBoundary标签
+
+(待...)
+
+### 跨域代码异常
+
+(待...)
+
+### IFrame异常
+
+(待...)
+
+
 
 
 ## 异常上报
 
+### 选择通讯方式
+
+#### 动态创建img标签
+
+其实上报就是要将捕获的异常信息发送到后端。最常用的方式首推动态创建标签方式。因为这种方式无需加载任何通讯库，而且页面是无需刷新的。基本上目前包括百度统计 Google统计都是基于这个原理做的埋点。
+
+```js
+new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
+```
+
+![image-20200206124035097](assets/image-20200206124035097.png)
+
+通过动态创建一个img,浏览器就会向服务器发送get请求。可以把你需要上报的错误数据放在querystring字符串中，利用这种方式就可以将错误上报到服务器了。
+
+#### Ajax上报
+
+这个太基础了而且不常用，如果实际上用axios库就可以搞定。
+
+
+
+### 上报哪些数据
+
+![image-20200206150411524](assets/image-20200206150411524.png)
+
+我们先看一下error事件参数：
+
+
+| 属性名称 | 含义          | 类型   |
+| -------- | ------------- | ------ |
+| message  | 错误信息      | string |
+| filename | 异常的资源url | string |
+| lineno   | 异常行号      | int    |
+| colno    | 异常列号      | int    |
+| error    | 错误对象      | object |
+| error.message    | 错误信息      |  string |
+| error.stack    | 错误信息      |  string      |
+
+
+
+其中核心的应该是错误栈，其实我们定位错误最主要的就是错误栈。
+
+错误堆栈中包含了绝大多数调试有关的信息。其中包括了异常位置（行号，列号），异常信息
+
+有兴趣的同学可以看看这篇文章
+
+>https://github.com/dwqs/blog/issues/49
+
+
+
+### 上报数据序列化
+
+由于通讯的时候只能以字符串方式传输，我们需要将对象进行序列化处理。
+
+大概分成以下三步：
+
+- 将异常数据从属性中解构出来存入一个JSON对象
+
+- 将JSON对象转换为字符串
+
+- 将字符串转换为Base64
+
+当然在后端也要做对应的反向操作 这个我们后面再说。
+
+```js
+
+window.addEventListener('error', args => {
+  console.log(
+    'error event:', args
+  );
+  uploadError(args)
+  return true;
+}, true);
+function uploadError({
+    lineno,
+    colno,
+    error: {
+      stack
+    },
+    timeStamp,
+    message,
+    filename
+  }) {
+    // 过滤
+    const info = {
+      lineno,
+      colno,
+      stack,
+      timeStamp,
+      message,
+      filename
+    }
+    // const str = new Buffer(JSON.stringify(info)).toString("base64");
+  	const str = window.btoa(JSON.stringify(info))
+    const host = 'http://localhost:7001/monitor/error'
+    new Image().src = `${host}?info=${str}`
+}
+```
+
+
+
+## 异常收集
+
+异常上报的数据一定是要有一个后端服务接收才可以。
+
+我们就以比较流行的开源框架eggjs为例来演示
+
+### 搭建eggjs工程
+
+```js
+# 全局安装egg-cli
+npm i egg-init -g 
+# 创建后端项目
+egg-init backend --type=simple
+cd backend
+npm i
+# 启动项目
+npm run dev
+```
+
+### 编写error上传接口
+
+首先在app/router.js添加一个新的路由
+
+```js
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/', controller.home.index);
+  // 创建一个新的路由
+  router.get('/monitor/error', controller.monitor.index);
+};
+```
+
+创建一个新的controller (app/controller/monitor)
+
+```js
+'use strict';
+
+const Controller = require('egg').Controller;
+const { getOriginSource } = require('../utils/sourcemap')
+const fs = require('fs')
+const path = require('path')
+
+class MonitorController extends Controller {
+  async index() {
+    const { ctx } = this;
+    const { info } = ctx.query
+    const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
+    console.log('fronterror:', json)
+    ctx.body = '';
+  }
+}
+
+module.exports = MonitorController;
+
+```
+
+![image-20200206163420155](assets/image-20200206163420155.png)
+
+看一下接收后的结果
+
+
+
+### 记入日志文件
+
+下一步就是讲错误记入日志。实现的方法可以自己用fs写，也可以借助log4js这样成熟的日志库。
+
+当然在eggjs中是支持我们定制日志那么我么你就用这个功能定制一个前端错误日志好了。
+
+在/config/config.default.js中增加一个定制日志配置
+
+```js
+// 定义前端错误日志
+config.customLogger = {
+  frontendLogger : {
+    file: path.join(appInfo.root, 'logs/frontend.log')
+  }
+}
+```
+
+在/app/controller/monitor.js中添加日志记录
+
+```js
+async index() {
+    const { ctx } = this;
+    const { info } = ctx.query
+    const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
+    console.log('fronterror:', json)
+    // 记入错误日志
+    this.ctx.getLogger('frontendLogger').error(json)
+    ctx.body = '';
+  }
+```
+
+最后实现的效果
+
+![image-20200206171529549](assets/image-20200206171529549.png)
+
+
+
+
+
+
 
 ## 异常分析
+
 ### Webpack插件实现SourceMap上传
 
 ### 解析ErrorStack

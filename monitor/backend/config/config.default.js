@@ -24,7 +24,7 @@ module.exports = appInfo => {
     },
   };
 
-  // 自定义日志级别
+  // 定义前端错误日志
   config.customLogger = {
     frontendLogger : {
       file: path.join(appInfo.root, 'logs/frontend.log')

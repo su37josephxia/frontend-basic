@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <h1>开课吧异常监控</h1>
+    <script src="https://cdn.bootcss.com/Base64/1.0.2/base64.js"></script>
     <script>
         // window.addEventListener('error', (...args) => {
         //     console.log('EventListener:', args, JSON.stringify(args[0].error))
@@ -48,15 +50,15 @@
             error
             console.log('1->end')
         }
-        window.onerror = (...args) => {
-            console.log('onerror:', args)
-            return true
-        }
+        // window.onerror = (...args) => {
+        //     console.log('onerror:', args)
+        //     return true
+        // }
 
 
 
-        setTimeout(async() => {
-            // fun1()
+        setTimeout(async () => {
+            fun1()
             // new Promise((resolve, reject) => {
             //     abcxxx()
             // })
@@ -65,17 +67,17 @@
             //     console.log('promise catch:',err)
             // });
         })
-
-        setTimeout(async() => {
-            const asyncFun = () => {
-                error()
-            }
-            try {
-                await asyncFun()
-            } catch (e) {
-                console.log('catch:',e)
-            }
-        })
+        // PromiseError
+        // setTimeout(async() => {
+        //     const asyncFun = () => {
+        //         error()
+        //     }
+        //     try {
+        //         await asyncFun()
+        //     } catch (e) {
+        //         console.log('catch:',e)
+        //     }
+        // })
         setTimeout(() => {
             console.log('2->begin')
             console.log('2->end')
@@ -87,13 +89,38 @@
             console.log(
                 'error event:', args
             );
+            uploadError(args)
             return true;
         }, true);
 
+        function uploadError({
+            lineno,
+            colno,
+            error: {
+                stack
+            },
+            timeStamp,
+            message,
+            filename
+        }) {
+            // 过滤
+            const info = {
+                lineno,
+                colno,
+                stack,
+                timeStamp,
+                message,
+                filename
+            }
+            
+            // const str = Base64.encode(JSON.stringify(info))
+            const str = window.btoa(JSON.stringify(info))
+            const host = 'http://localhost:7001/monitor/error'
+            new Image().src = `${host}?info=${str}`
+        }
+
         // new Image().src('./xxxx.png')
-
-
-       
+        // new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
     </script>
     <!-- <img src="./xxxxx.png"> -->
 </body>

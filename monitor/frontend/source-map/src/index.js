@@ -5,8 +5,8 @@ function uploadError({ lineno, colno, error: { stack }, timeStamp, message,filen
     const info = { lineno, colno, stack, timeStamp, message ,filename}
 
     console.log('error', info, JSON.stringify(info))
-    const str = new Buffer(JSON.stringify(info)).toString("base64");
-
+    // const str = new Buffer(JSON.stringify(info)).toString("base64");
+    Base64.encode(JSON.stringify(info))
     console.log('str:', str)
     const host = 'http://localhost:7001/monitor/error'
     new Image().src = `${host}?info=${str}`
