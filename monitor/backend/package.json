@@ -9,6 +9,7 @@
   "dependencies": {
     "egg": "^2.15.1",
     "egg-scripts": "^2.11.0",
+    "error-stack-parser": "^2.0.6",
     "source-map": "^0.7.3"
   },
   "devDependencies": {

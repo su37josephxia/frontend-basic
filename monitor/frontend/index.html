@@ -10,22 +10,76 @@
 
 <body>
     <script>
-        window.addEventListener('error', (...args) => {
-            console.log('EventListener:', args, JSON.stringify(args[0].error))
+        // window.addEventListener('error', (...args) => {
+        //     console.log('EventListener:', args, JSON.stringify(args[0].error))
 
-        })
+        // })
+        // window.onerror = (...args) => {
+        //     console.log('window onerror', args)
+        // }
+
+
+        //         function uploadError({ lineno, colno, error: { stack }, timeStamp, message,filename }) {
+        //     // 过滤
+        //     const info = { lineno, colno, stack, timeStamp, message ,filename}
+
+        //     console.log('error', info, JSON.stringify(info))
+        //     const str = new Buffer(JSON.stringify(info)).toString("base64");
+
+        //     console.log('str:', str)
+        //     const host = 'http://localhost:7001/monitor/error'
+        //     new Image().src = `${host}?info=${str}`
+
+        // }
+
+        // window.addEventListener('error', errorInfo => {
+        //     console.log('EventListener:', errorInfo)
+
+        //     uploadError(errorInfo)
+        //     return true
+        // }, true)
+
+
+
+        //         aabc('123')
+
+        function fun1() {
+            console.log('1->begin')
+            error
+            console.log('1->end')
+        }
         window.onerror = (...args) => {
-            console.log('window onerror', args)
+            console.log('onerror:', args)
+            return true
         }
 
 
 
         setTimeout(() => {
-            abc(123)
-        }, 1000)
+            // fun1()
+            new Promise((resolve, reject) => {
+                abcxxx()
+            })
+            // 增加异常捕获
+            .catch((err) => {
+                console.log('promise catch:',err)
+            });
+        })
+        setTimeout(() => {
+            console.log('2->begin')
+            console.log('2->end')
+        })
 
-        aabc('123')
+        window.addEventListener('error', args => {
+            console.log(
+                'error event:', args
+            );
+            return true;
+        }, true);
+
+        // new Image().src('./xxxx.png')
     </script>
+    <!-- <img src="./xxxxx.png"> -->
 </body>
 
 </html>

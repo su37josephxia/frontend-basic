@@ -14,15 +14,17 @@ class MonitorController extends Controller {
 
   getInfo(info) {
     const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
-    
+    console.log('frontendLogger',json)
     // 打印前端日志
     this.ctx.getLogger('frontendLogger').error(json)
-    
+
     // 获取source文件名
-    const filename = json.filename.slice(json.filename.lastIndexOf('/') + 1)
-    
-    getOriginSource(path.join(this.config.baseDir , 'uploads'))(filename, json.lineno, json.colno)
-    
+    if (json.filename) {
+      const filename = json.filename.slice(json.filename.lastIndexOf('/') + 1)
+      getOriginSource(path.join(this.config.baseDir, 'uploads'))(filename, json.lineno, json.colno)
+
+    }
+
   }
 
   async upload() {
