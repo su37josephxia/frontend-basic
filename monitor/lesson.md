@@ -20,7 +20,7 @@
 
 
 
-## 收集异常
+## 异常收集
 
 ### JS异常处理
 
@@ -118,7 +118,7 @@ try {
 
 
 
-### window.onerror
+#### window.onerror
 
 window.onerror 最大的好处就是可以同步任务还是异步任务都可捕获。
 
@@ -145,7 +145,7 @@ setTimeout(() => {
 
 
 
-### 监听错误事件
+#### 监听error事件 
 
 > window.addEventListener('error',() => {}）
 
@@ -174,7 +174,7 @@ window.addEventListener('error', args => {
 
 
 
-### Promise错误的捕获
+#### Promise异常捕获
 
 Promise的出现主要是为了让我们解决回调地域问题。基本是我们程序开发的标配了。虽然我们提倡使用es7 async/await语法来写，但是不排除很多祖传代码还是存在Promise写法。
 
@@ -198,9 +198,74 @@ new Promise((resolve, reject) => {
 
 除非每个Promise都添加一个catch方法。但是显然是不能这样做。
 
+```js
+window.addEventListener("unhandledrejection", e => {
+  console.log('unhandledrejection',e)
+});
+```
 
 
 
+![image-20200206111017073](assets/image-20200206111017073.png)
+
+
+
+我们可以考虑将unhandledrejection事件捕获错误抛出交由错误事件统一处理就可以了
+
+```js
+window.addEventListener("unhandledrejection", e => {
+  throw e.reason
+});
+```
+
+
+
+#### async/await异常捕获
+
+```js
+setTimeout(async() => {
+  try {
+    await asyncFun()
+  } catch (e) {
+    console.log('catch:',e)
+  }
+})
+```
+
+实际上async/await语法本质还是Promise语法。区别就是async方法可以被上层的try/catch捕获。
+
+![image-20200206113325907](assets/image-20200206113325907.png)
+
+如果不去捕获的话就会和Promise一样，需要用unhandledrejection事件捕获。这样的话我们只需要在全局增加unhandlerejection就好了。
+
+
+
+![image-20200206112730746](assets/image-20200206112730746.png)
+
+#### 小结
+
+| 异常类型                   | 同步方法 | 异步方法 | 资源加载 | Promise | async/await |
+| -------------------------- | -------- | -------- | -------- | ------- | ----------- |
+| try/catch                  | ✔️        |          |          |         | ✔️           |
+| onerror                    | ✔️        | ✔️        |          |         |             |
+| error事件监听              | ✔️        | ✔️        | ✔️        |         |             |
+| unhandledrejection事件监听 |          |          |          | ✔️       | ✔️           |
+
+实际上我们可以将unhandledrejection事件抛出的异常再次抛出就可以统一通过error事件进行处理了。
+
+最终用代码表示如下：
+
+```js
+window.addEventListener("unhandledrejection", e => {
+  throw e.reason
+});
+window.addEventListener('error', args => {
+  console.log(
+    'error event:', args
+  );
+  return true;
+}, true);
+```
 
 
 
@@ -209,10 +274,10 @@ new Promise((resolve, reject) => {
 ### React
 
 
-## 错误上报
+## 异常上报
 
 
-## 错误分析
+## 异常分析
 ### Webpack插件实现SourceMap上传
 
 ### 解析ErrorStack
