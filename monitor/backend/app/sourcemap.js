@@ -39,12 +39,20 @@ const getOriginalPosition = async (sourcemap, line, column) => {
 };
 
 const getOriginSource = sourceMapPath => async (filename, colno, lineno) => {
+  // 读取sourceMap文件
   const mapFile = `${sourceMapPath}/${filename}.map`
-  const res = await getOriginalPosition(mapFile, colno, lineno)
-  console.log('parse js : ', res)
+  const readFile = promisify(fs.readFile)
+  const content = await readFile(sourcemap, 'utf8')
+
+  const parseData = consumer.originalPositionFor({ line, column })
+  consumer.destroy();
+  return parseData
 }
 
-module.exports = { getOriginSource }
+
+
+
+module.exports = { getOriginSource, getOriginalErrorStack }
 
 
 // setTimeout(async () => { await getOrigin('bundle.2782550ae6ed279a38be.js', 5, 12012) })

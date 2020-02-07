@@ -1,7 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const { getOriginSource } = require('../utils/sourcemap')
+const StackParser = require('../utils/stackparser')
 const fs = require('fs')
 const path = require('path')
 
@@ -12,24 +12,35 @@ class MonitorController extends Controller {
     const { info } = ctx.query
     const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
     console.log('fronterror:', json)
-    this.ctx.getLogger('frontendLogger').error(json)
+    
+    // 转换为源码位置
+    const stackParser = new StackParser(path.join(this.config.baseDir, 'uploads'))
+    const stackFrame = stackParser.parseStackTrack(json.stack, json.message)
+    const originStack = await stackParser.getOriginalErrorStack(stackFrame)
+    this.ctx.getLogger('frontendLogger').error(json,originStack)
+    
+    // this.parseStackTrack(json.stack, json.message)
     ctx.body = '';
   }
 
-  getInfo(info) {
-    const json = JSON.parse(Buffer.from(info, 'base64').toString('utf-8'))
-    console.log('frontendLogger', json)
-    // 打印前端日志
-    this.ctx.getLogger('frontendLogger').error(json)
+  // /**
+  //  * 错误堆栈反序列化
+  //  * @param {*} stack 错误堆栈
+  //  */
+  // parseStackTrack(stack, message) {
+  //   console.log('$$$getError:', stack)
+  //   const error = new Error(message)
+  //   error.stack = stack
+  //   const stackFrame = ErrorStackParser.parse(error)
+  //   stackFrame.map(v => {
+  //     console.log('stackFrame', v)
+  //   })
+  //   const stackFrame = stackParser.parseStackTrack(error.stack, error.message)
+  //   const originStack = await stackParser.getOriginalErrorStack(stackFrame)
+  //   // console.log('origin-stack',str)
+  //   return stackFrame
+  // }
 
-    // 获取source文件名
-    // if (json.filename) {
-    //   const filename = json.filename.slice(json.filename.lastIndexOf('/') + 1)
-    //   getOriginSource(path.join(this.config.baseDir, 'uploads'))(filename, json.lineno, json.colno)
-
-    // }
-
-  }
 
   async upload() {
     const { ctx } = this
