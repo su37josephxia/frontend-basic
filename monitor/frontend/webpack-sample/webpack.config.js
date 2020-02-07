@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // dist清理
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // 自动上传Map
-UploadSourceMapWebpackPlugin = require('./plugin/uploadSourceMapWebPackPlugin')
+UploadSourceMapWebpackPlugin = require('../plugin/uploadSourceMapWebPackPlugin')
 
 
 

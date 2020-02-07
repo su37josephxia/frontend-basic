@@ -1,5 +1,5 @@
 // 自动上传Map
-UploadSourceMapWebpackPlugin = require('../source-map/plugin/uploadSourceMapWebPackPlugin')
+UploadSourceMapWebpackPlugin = require('../plugin/uploadSourceMapWebPackPlugin')
 
 module.exports = {
     configureWebpack: {

@@ -14,7 +14,7 @@ module.exports = appInfo => {
 
   // 静态服务位置
   config.static = {
-    dir: path.resolve(appInfo.baseDir,'../frontend/source-map/dist/')
+    dir: path.resolve(appInfo.baseDir,'../frontend/webpack-sample/dist/')
 
   };
 
