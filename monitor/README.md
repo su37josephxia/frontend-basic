@@ -3,10 +3,11 @@
 ## 您将Get的技能
 
 - 收集前端错误（原生、React、Vue）
-- 错误上报至后端服务器
-- 解析错误堆栈
-- 利用webpack插件自动上传sourcemap
-- docker部署
+- 编写错误上报逻辑
+- 利用Egg.js编写一个错误日志采集服务
+- 编写webpack插件自动上传sourcemap
+- 利用sourcemap还原压缩代码源码位置
+- 利用Jest进行单元测试
 
 
 
@@ -44,7 +45,7 @@ setTimeout(() => {
 
 
 
-![image-20200205170222376](assets/image-20200205170222376.png)
+![image-20200205170222376](./assets/image-20200205170222376.png)
 
 上面的例子我们用setTimeout分别启动了两个任务，虽然第一个任务执行了一个错误的方法。程序执行停止了。但是另外一个任务并没有收到影响。
 
@@ -70,7 +71,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205172234075](assets/image-20200205172234075.png)
+![image-20200205172234075](./assets/image-20200205172234075.png)
 
 如果在函数中错误没有被捕获，错误会上抛。
 
@@ -89,7 +90,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205173058230](assets/image-20200205173058230.png)控制台中打印出的分别是错误信息和错误堆栈。
+![image-20200205173058230](./assets/image-20200205173058230.png)控制台中打印出的分别是错误信息和错误堆栈。
 
 
 
@@ -112,7 +113,7 @@ try {
 }
 ```
 
-![image-20200205173548456](assets/image-20200205173548456.png)
+![image-20200205173548456](./assets/image-20200205173548456.png)
 
 大家注意运行结果，异常并没有被捕获。
 
@@ -139,7 +140,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205175601033](assets/image-20200205175601033.png)
+![image-20200205175601033](./assets/image-20200205175601033.png)
 
 - onerror返回值
 
@@ -172,7 +173,7 @@ window.addEventListener('error', args => {
 
 运行结果如下：
 
-![image-20200206102602184](assets/image-20200206102602184.png)
+![image-20200206102602184](./assets/image-20200206102602184.png)
 
 
 
@@ -208,7 +209,7 @@ window.addEventListener("unhandledrejection", e => {
 
 
 
-![image-20200206111017073](assets/image-20200206111017073.png)
+![image-20200206111017073](./assets/image-20200206111017073.png)
 
 
 
@@ -236,13 +237,13 @@ setTimeout(async() => {
 
 实际上async/await语法本质还是Promise语法。区别就是async方法可以被上层的try/catch捕获。
 
-![image-20200206113325907](assets/image-20200206113325907.png)
+![image-20200206113325907](./assets/image-20200206113325907.png)
 
 如果不去捕获的话就会和Promise一样，需要用unhandledrejection事件捕获。这样的话我们只需要在全局增加unhandlerejection就好了。
 
 
 
-![image-20200206112730746](assets/image-20200206112730746.png)
+![image-20200206112730746](./assets/image-20200206112730746.png)
 
 #### 小结
 
@@ -281,11 +282,11 @@ setTimeout(() => {
 }, 1000)
 ```
 
-![image-20200207154545464](assets/image-20200207154545464.png)
+![image-20200207154545464](./assets/image-20200207154545464.png)
 
 出错的代码指向被压缩后的JS文件，而JS文件长下图这个样子。
 
-![image-20200207154708908](assets/image-20200207154708908.png)
+![image-20200207154708908](./assets/image-20200207154708908.png)
 
 如果想将错误和原有的代码关联起来就需要sourcemap文件的帮忙了。
 
@@ -301,11 +302,73 @@ setTimeout(() => {
 
 ### Vue
 
+#### 创建工程
+
+利用vue-cli工具直接创建一个项目。
+
+```js
+# 安装vue-cli
+npm install -g @vue/cli
+
+# 创建一个项目
+vue create vue-sample
+
+cd vue-sample
+npm i
+// 启动应用
+npm run serve
+
+```
+
+
+
+我们故意在src/components/HelloWorld.vue
+
+<script>
+export default {
+  name: "HelloWorld",
+  props: {
+    msg: String
+  },
+  mounted() {
+    // 制造一个错误
+    abc()
+  }
+};
+</script>
+
+然后在src/main.js中添加错误事件监听
+
+```js
+window.addEventListener('error', args => {
+  console.log('error', error)
+})
+```
+
+这个时候 错误会在控制台中被打印出来,但是错误事件并没有监听到。
+
+![image-20200207165626482](./assets/image-20200207165626482.png)
+
 
 
 #### handleError
 
-(待...)
+为了对Vue发生的异常进行统一的上报，需要利用vue提供的handleError句柄。一旦Vue发生异常都会调用这个方法。
+
+我们在src/main.js
+
+```js
+Vue.config.errorHandler = function (err, vm, info) {
+  console.log('errorHandle:', err)
+  throw err
+}
+```
+
+逻辑也很简单只是简单的抛出Error对象交由错误事件捕捉做统一处理就好了。
+
+运行结果结果：
+
+![image-20200207171558588](./assets/image-20200207171558588.png)
 
 ### React
 
@@ -338,7 +401,7 @@ setTimeout(() => {
 new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 ```
 
-![image-20200206124035097](assets/image-20200206124035097.png)
+![image-20200206124035097](./assets/image-20200206124035097.png)
 
 通过动态创建一个img,浏览器就会向服务器发送get请求。可以把你需要上报的错误数据放在querystring字符串中，利用这种方式就可以将错误上报到服务器了。
 
@@ -350,7 +413,7 @@ new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 
 ### 上报哪些数据
 
-![image-20200206150411524](assets/image-20200206150411524.png)
+![image-20200206150411524](./assets/image-20200206150411524.png)
 
 我们先看一下error事件参数：
 
@@ -484,7 +547,7 @@ module.exports = MonitorController;
 
 ```
 
-![image-20200206163420155](assets/image-20200206163420155.png)
+![image-20200206163420155](./assets/image-20200206163420155.png)
 
 看一下接收后的结果
 
@@ -523,7 +586,7 @@ async index() {
 
 最后实现的效果
 
-![image-20200206171529549](assets/image-20200206171529549.png)
+![image-20200206171529549](./assets/image-20200206171529549.png)
 
 
 
@@ -673,7 +736,7 @@ async upload() {
 
 执行webpack打包时调用插件sourcemap被上传至服务器。
 
-![image-20200206202732716](assets/image-20200206202732716.png)
+![image-20200206202732716](./assets/image-20200206202732716.png)
 
 
 
@@ -694,7 +757,7 @@ async upload() {
 
 搭建Jest框架
 
-![image-20200207113234836](assets/image-20200207113234836.png)
+![image-20200207113234836](./assets/image-20200207113234836.png)
 
 
 
@@ -749,7 +812,7 @@ it('stackparser on-the-fly', async () => {
 npx jest stackparser --watch
 ```
 
-![image-20200207114208691](assets/image-20200207114208691.png)
+![image-20200207114208691](./assets/image-20200207114208691.png)
 
 显示运行失败，原因很简单因为我们还没有实现对吧。下面我们就实现一下这个方法。
 
@@ -773,7 +836,7 @@ parseStackTrack(stack, message) {
 
 运行效果
 
-![image-20200207115955932](assets/image-20200207115955932.png)
+![image-20200207115955932](./assets/image-20200207115955932.png)
 
 #### 解析ErrorStack
 
@@ -843,7 +906,7 @@ it('stackparser on-the-fly', async () => {
 })
 ```
 
-![image-20200207120534213](assets/image-20200207120534213.png)
+![image-20200207120534213](./assets/image-20200207120534213.png)
 
 看一下结果测试通过。
 
@@ -871,7 +934,21 @@ async index() {
 
 运行效果:
 
-![image-20200207122613284](assets/image-20200207122613284.png)
+![image-20200207122613284](./assets/image-20200207122613284.png)
+
+
+
+## 开源框架
+
+### Fundebug
+
+[Fundebug](https://www.fundebug.com/)专注于JavaScript、微信小程序、微信小游戏、支付宝小程序、React Native、Node.js和Java线上应用实时BUG监控。 自从2016年双十一正式上线，Fundebug累计处理了10亿+错误事件，付费客户有阳光保险、荔枝FM、掌门1对1、核桃编程、微脉等众多品牌企业。欢迎免费试用！
+
+### Sentry
+
+Sentry 是一个开源的实时错误追踪系统，可以帮助开发者实时监控并修复异常问题。它主要专注于持续集成、提高效率并且提升用户体验。Sentry 分为服务端和客户端 SDK，前者可以直接使用它家提供的在线服务，也可以本地自行搭建；后者提供了对多种主流语言和框架的支持，包括 React、Angular、Node、Django、RoR、PHP、Laravel、Android、.NET、JAVA 等。同时它可提供了和其他流行服务集成的方案，例如 GitHub、GitLab、bitbuck、heroku、slack、Trello 等。目前公司的项目也都在逐步应用上 Sentry 进行错误日志管理。
+
+
 
 
 
