@@ -372,11 +372,98 @@ Vue.config.errorHandler = function (err, vm, info) {
 
 ### React
 
-#### componentDidCatch
+```js
+npx create-react-app react-sample
+cd react-sample
+yarn start
+
+```
+
+我们l用useEffect hooks 制造一个错误
+
+```js
+import React ,{useEffect} from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  useEffect(() => {	
+    // 发生异常
+    error()
+  });	
+
+  return (
+    <div className="App">
+      // ...略...
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+并且在src/index.js中增加错误事件监听逻辑
+
+```
+window.addEventListener('error', args => {
+    console.log('error', error)
+})
+```
+
+但是从运行结果看虽然输出了错误日志但是还是服务捕获。
+
+![image-20200207183546189](assets/image-20200207183546189.png)
+
+#### 
 
 #### ErrorBoundary标签
 
-(待...)
+**错误边界仅可以捕获其子组件的错误**。错误边界无法捕获其自身的错误。如果一个错误边界无法渲染错误信息，则错误会向上冒泡至最接近的错误边界。这也类似于 JavaScript 中 catch {} 的工作机制。
+
+
+
+创建ErrorBoundary组件
+
+```js
+import React from 'react'; 
+export default class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+  
+    componentDidCatch(error, info) {
+      // 发生异常时打印错误
+      console.log('componentDidCatch',error)
+    }
+  
+    render() {
+      return this.props.children;
+    }
+  }
+```
+
+
+
+在src/index.js中包裹App标签
+
+```js
+import ErrorBoundary from './ErrorBoundary'
+
+ReactDOM.render(
+    <ErrorBoundary>
+        <App />
+    </ErrorBoundary>
+    , document.getElementById('root'));
+```
+
+
+
+最终运行的结果
+
+![image-20200207185123353](assets/image-20200207185123353.png)
+
+
 
 ### 跨域代码异常
 
