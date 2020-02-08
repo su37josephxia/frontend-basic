@@ -2,23 +2,21 @@
 UploadSourceMapWebpackPlugin = require('../plugin/uploadSourceMapWebPackPlugin')
 
 module.exports = {
-    configureWebpack: {
-        // 添加自动上传sourcemap文件
-        // plugins: [
-        //     new UploadSourceMapWebpackPlugin({
-        //         uploadUrl: 'http://localhost:7001/monitor/sourcemap',
-        //         apiKey: 'kaikeba'
-        //     })
-        // ],
-        
+    configureWebpack:{
+        plugins:[
+            new UploadSourceMapWebpackPlugin({
+                uploadUrl: 'http://localhost:7001/monitor/sourcemap'
+            })
+        ],
     },
-    // 关闭eslint规则
+    
+
+    // 关闭eslint
     devServer: {
         overlay: {
-            warnings: true,
+            warning: true,
             errors: true
         }
     },
-    lintOnSave:false
-
+    lintOnSave: false
 }

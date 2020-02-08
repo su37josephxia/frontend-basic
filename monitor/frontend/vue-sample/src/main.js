@@ -3,29 +3,14 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-window.addEventListener('error', args => {
-  console.log('error', error)
-})
-
-Vue.config.errorHandler = function (err, vm, info) {
-  console.log('errorHandle:', err)
-  throw err
-  // uploadError(err, info)
+Vue.config.errorHandler = (err, vm, info) => {
+  console.log('errorHandler:', err)
 }
 
-// function uploadError({ stack }, message) {
-//   // 过滤
-//   const info = { stack, message }
+window.addEventListener('error', event => {
+  console.log('error: ', event)
+})
 
-//   console.log('error', info, JSON.stringify(info))
-//   const str = new Buffer(JSON.stringify(info)).toString("base64");
-
-//   console.log('str:', str)
-//   const host = 'http://localhost:7001/monitor/error'
-//   new Image().src = `${host}?info=${str}`
-
-// }
 new Vue({
   render: h => h(App),
 }).$mount('#app')
-

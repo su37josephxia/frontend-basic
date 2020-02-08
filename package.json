@@ -27,6 +27,7 @@
     "antd": "file:react/antd",
     "co": "^4.6.0",
     "github-webhook-handler": "^0.7.1",
+    "glob": "^7.1.6",
     "requirejs": "^2.3.6",
     "thunkify": "^2.1.2"
   }
