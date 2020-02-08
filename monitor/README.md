@@ -164,11 +164,13 @@ addEventListener就是
 
 ```js
 window.addEventListener('error', args => {
-  console.log(
-    'error event:', args
-  );
-  return true;
-}, true);
+    console.log(
+      'error event:', args
+    );
+    return true;
+  }, 
+  true // 利用捕获方式
+);
 ```
 
 运行结果如下：
@@ -226,6 +228,9 @@ window.addEventListener("unhandledrejection", e => {
 #### async/await异常捕获
 
 ```js
+const asyncFunc = () => new Promise(resolve => {
+  error
+})
 setTimeout(async() => {
   try {
     await asyncFun()
@@ -320,10 +325,27 @@ npm run serve
 
 ```
 
+为了测试的需要我们暂时关闭eslint 这里面还是建议大家全程打开eslint
+
+在vue.config.js进行配置
+
+```js
+module.exports = {   
+  // 关闭eslint规则
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  },
+  lintOnSave:false
+}
+```
+
 
 
 我们故意在src/components/HelloWorld.vue
-
+```html
 <script>
 export default {
   name: "HelloWorld",
@@ -336,10 +358,11 @@ export default {
   }
 };
 </script>
+​```html
 
 然后在src/main.js中添加错误事件监听
 
-```js
+​```js
 window.addEventListener('error', args => {
   console.log('error', error)
 })
@@ -360,11 +383,8 @@ window.addEventListener('error', args => {
 ```js
 Vue.config.errorHandler = function (err, vm, info) {
   console.log('errorHandle:', err)
-  throw err
 }
 ```
-
-逻辑也很简单只是简单的抛出Error对象交由错误事件捕捉做统一处理就好了。
 
 运行结果结果：
 
