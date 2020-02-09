@@ -1,15 +1,13 @@
-// 自动上传Map
-UploadSourceMapWebpackPlugin = require('../plugin/uploadSourceMapWebPackPlugin')
+const UploadSourceMapWebPackPlugin = require('../plugin/uploadSourceMapWebPackPlugin')
 
 module.exports = {
-    configureWebpack:{
+    configureWebpack : {
         plugins:[
-            new UploadSourceMapWebpackPlugin({
+            new UploadSourceMapWebPackPlugin({
                 uploadUrl: 'http://localhost:7001/monitor/sourcemap'
             })
-        ],
+        ]
     },
-    
 
     // 关闭eslint
     devServer: {

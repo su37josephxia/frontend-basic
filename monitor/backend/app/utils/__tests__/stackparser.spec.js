@@ -17,6 +17,8 @@ it('stackparser on-the-fly', async () => {
     })
     const originStack = await stackParser.getOriginalErrorStack(stackFrame)
 
+    console.log('originStack',originStack)
+
     // 断言 
     expect(originStack[0]).toMatchObject(
         {
