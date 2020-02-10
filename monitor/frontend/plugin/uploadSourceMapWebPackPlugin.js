@@ -1,11 +1,11 @@
 const glob = require('glob')
 const path = require('path')
+
 const fs = require('fs')
 const http = require('http')
 class UploadSourceMapWebPackPlugin {
     constructor(options) {
         this.options = options
-
     }
     apply(compiler) {
         console.log('UploadSourceMapWebPackPlugin apply')
@@ -13,6 +13,7 @@ class UploadSourceMapWebPackPlugin {
         compiler.hooks.done.tap('upload-sourecemap-plugin', async status => {
             // 读取sourcemap文件
             const list = glob.sync(path.join(status.compilation.outputOptions.path, `./**/*.{js.map,}`))
+            // console.log('list:', list)
             for (let filename of list) {
                 await this.upload(this.options.uploadUrl, filename)
             }
@@ -20,7 +21,7 @@ class UploadSourceMapWebPackPlugin {
     }
     upload(url, file) {
         return new Promise(resolve => {
-            console.log('uploadMap:', file)
+            console.log('upload Map:', file)
 
             const req = http.request(
                 `${url}?name=${path.basename(file)}`,
@@ -28,19 +29,19 @@ class UploadSourceMapWebPackPlugin {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/octet-stream',
-                        Connection: "keep-alive",
-                        "Transfer-Encoding": "chunked"
+                        Connection: 'keep-alive',
+                        'Transfer-Encoding': 'chunked'
                     }
                 }
             )
             fs.createReadStream(file)
-                .on("data", chunk => {
-                    req.write(chunk);
+                .on('data', chunk => {
+                    req.write(chunk)
                 })
-                .on("end", () => {
-                    req.end();
+                .on('end', () => {
+                    req.end()
                     resolve()
-                });
+                })
         })
     }
 
