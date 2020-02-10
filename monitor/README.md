@@ -1,3 +1,5 @@
+![](assets/image-20200210112827196.png)
+
 # 前端异常监控系统(Vue + Webpack + Node.js + Egg.js + Jest)
 
 ## 您将Get的技能
