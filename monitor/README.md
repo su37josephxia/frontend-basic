@@ -1065,3 +1065,11 @@ Sentry 是一个开源的实时错误追踪系统，可以帮助开发者实时�
 
 
 # 总结
+
+截止到目前为止，我们把前端异常监控的基本功能算是形成了一个MVP(最小化可行产品)。后面需要升级的还有很多，对错误日志的分析和可视化方面可以使用ELK。发布和部署可以采用Docker。对eggjs的上传和上报最好要增加权限控制功能。
+
+
+
+参考代码位置： https://github.com/su37josephxia/frontend-basic/tree/master/monitor
+
+欢迎指正，欢迎Star。
