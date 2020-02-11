@@ -1,6 +1,6 @@
-![](assets/image-20200210112827196.png)
+![](./assets/image-20200210112827196.png)
 
-# 前端异常监控系统(Vue + Webpack + Node.js + Egg.js + Jest)
+# 从0到1搭建前端异常监控系统(Vue + Webpack + Node.js + Egg.js + Jest)
 
 ## 您将Get的技能
 
@@ -47,7 +47,7 @@ setTimeout(() => {
 
 
 
-![image-20200205170222376](assets/image-20200205170222376.png)
+![image-20200205170222376](./assets/image-20200205170222376.png)
 
 上面的例子我们用setTimeout分别启动了两个任务，虽然第一个任务执行了一个错误的方法。程序执行停止了。但是另外一个任务并没有收到影响。
 
@@ -73,7 +73,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205172234075](assets/image-20200205172234075.png)
+![image-20200205172234075](./assets/image-20200205172234075.png)
 
 如果在函数中错误没有被捕获，错误会上抛。
 
@@ -92,7 +92,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205173058230](assets/image-20200205173058230.png)控制台中打印出的分别是错误信息和错误堆栈。
+![image-20200205173058230](./assets/image-20200205173058230.png)控制台中打印出的分别是错误信息和错误堆栈。
 
 
 
@@ -115,7 +115,7 @@ try {
 }
 ```
 
-![image-20200205173548456](assets/image-20200205173548456.png)
+![image-20200205173548456](./assets/image-20200205173548456.png)
 
 大家注意运行结果，异常并没有被捕获。
 
@@ -142,7 +142,7 @@ setTimeout(() => {
 })
 ```
 
-![image-20200205175601033](assets/image-20200205175601033.png)
+![image-20200205175601033](./assets/image-20200205175601033.png)
 
 - onerror返回值
 
@@ -177,7 +177,7 @@ window.addEventListener('error', args => {
 
 运行结果如下：
 
-![image-20200206102602184](assets/image-20200206102602184.png)
+![image-20200206102602184](./assets/image-20200206102602184.png)
 
 
 
@@ -213,7 +213,7 @@ window.addEventListener("unhandledrejection", e => {
 
 
 
-![image-20200206111017073](assets/image-20200206111017073.png)
+![image-20200206111017073](./assets/image-20200206111017073.png)
 
 
 
@@ -244,13 +244,13 @@ setTimeout(async() => {
 
 实际上async/await语法本质还是Promise语法。区别就是async方法可以被上层的try/catch捕获。
 
-![image-20200206113325907](assets/image-20200206113325907.png)
+![image-20200206113325907](./assets/image-20200206113325907.png)
 
 如果不去捕获的话就会和Promise一样，需要用unhandledrejection事件捕获。这样的话我们只需要在全局增加unhandlerejection就好了。
 
 
 
-![image-20200206112730746](assets/image-20200206112730746.png)
+![image-20200206112730746](./assets/image-20200206112730746.png)
 
 #### 小结
 
@@ -289,11 +289,11 @@ setTimeout(() => {
 }, 1000)
 ```
 
-![image-20200207154545464](assets/image-20200207154545464.png)
+![image-20200207154545464](./assets/image-20200207154545464.png)
 
 出错的代码指向被压缩后的JS文件，而JS文件长下图这个样子。
 
-![image-20200207154708908](assets/image-20200207154708908.png)
+![image-20200207154708908](./assets/image-20200207154708908.png)
 
 如果想将错误和原有的代码关联起来就需要sourcemap文件的帮忙了。
 
@@ -372,7 +372,7 @@ window.addEventListener('error', args => {
 
 这个时候 错误会在控制台中被打印出来,但是错误事件并没有监听到。
 
-![image-20200207165626482](assets/image-20200207165626482.png)
+![image-20200207165626482](./assets/image-20200207165626482.png)
 
 
 
@@ -390,7 +390,7 @@ Vue.config.errorHandler = function (err, vm, info) {
 
 运行结果结果：
 
-![image-20200207171558588](assets/image-20200207171558588.png)
+![image-20200207171558588](./assets/image-20200207171558588.png)
 
 ### React
 
@@ -435,7 +435,7 @@ window.addEventListener('error', args => {
 
 但是从运行结果看虽然输出了错误日志但是还是服务捕获。
 
-![image-20200207183546189](assets/image-20200207183546189.png)
+![image-20200207183546189](./assets/image-20200207183546189.png)
 
 #### 
 
@@ -483,7 +483,7 @@ ReactDOM.render(
 
 最终运行的结果
 
-![image-20200207185123353](assets/image-20200207185123353.png)
+![image-20200207185123353](./assets/image-20200207185123353.png)
 
 
 
@@ -510,7 +510,7 @@ ReactDOM.render(
 new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 ```
 
-![image-20200206124035097](assets/image-20200206124035097.png)
+![image-20200206124035097](./assets/image-20200206124035097.png)
 
 通过动态创建一个img,浏览器就会向服务器发送get请求。可以把你需要上报的错误数据放在querystring字符串中，利用这种方式就可以将错误上报到服务器了。
 
@@ -522,7 +522,7 @@ new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 
 ### 上报哪些数据
 
-![image-20200206150411524](assets/image-20200206150411524.png)
+![image-20200206150411524](./assets/image-20200206150411524.png)
 
 我们先看一下error事件参数：
 
@@ -656,7 +656,7 @@ module.exports = MonitorController;
 
 ```
 
-![image-20200206163420155](assets/image-20200206163420155.png)
+![image-20200206163420155](./assets/image-20200206163420155.png)
 
 看一下接收后的结果
 
@@ -695,7 +695,7 @@ async index() {
 
 最后实现的效果
 
-![image-20200206171529549](assets/image-20200206171529549.png)
+![image-20200206171529549](./assets/image-20200206171529549.png)
 
 
 
@@ -848,7 +848,7 @@ async upload() {
 
 执行webpack打包时调用插件sourcemap被上传至服务器。
 
-![image-20200206202732716](assets/image-20200206202732716.png)
+![image-20200206202732716](./assets/image-20200206202732716.png)
 
 
 
@@ -869,7 +869,7 @@ async upload() {
 
 搭建Jest框架
 
-![image-20200207113234836](assets/image-20200207113234836.png)
+![image-20200207113234836](./assets/image-20200207113234836.png)
 
 
 
@@ -924,7 +924,7 @@ it('stackparser on-the-fly', async () => {
 npx jest stackparser --watch
 ```
 
-![image-20200207114208691](assets/image-20200207114208691.png)
+![image-20200207114208691](./assets/image-20200207114208691.png)
 
 显示运行失败，原因很简单因为我们还没有实现对吧。下面我们就实现一下这个方法。
 
@@ -948,7 +948,7 @@ parseStackTrack(stack, message) {
 
 运行效果
 
-![image-20200207115955932](assets/image-20200207115955932.png)
+![image-20200207115955932](./assets/image-20200207115955932.png)
 
 #### 解析ErrorStack
 
@@ -1018,7 +1018,7 @@ it('stackparser on-the-fly', async () => {
 })
 ```
 
-![image-20200207120534213](assets/image-20200207120534213.png)
+![image-20200207120534213](./assets/image-20200207120534213.png)
 
 看一下结果测试通过。
 
@@ -1046,7 +1046,7 @@ async index() {
 
 运行效果:
 
-![image-20200207122613284](assets/image-20200207122613284.png)
+![image-20200207122613284](./assets/image-20200207122613284.png)
 
 
 
