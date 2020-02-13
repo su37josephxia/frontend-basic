@@ -50,7 +50,14 @@ module.exports = {
                 title: '算法',
                 collapsable: false,
                 children: [['/算法_去重_排序_递归.md', '一道面试题引发的思考']]
-            }
+            },
+            {
+                title: '开源',
+                collapsable: false,
+                children: [
+                    '/从零到一开发一个开源项目.md',
+                ]
+            },
         ]
     }
 }

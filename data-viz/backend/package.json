@@ -1,0 +1,17 @@
+{
+  "name": "data-viz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "node-schedule": "^1.3.2",
+    "puppeteer": "^2.1.1"
+  }
+}
