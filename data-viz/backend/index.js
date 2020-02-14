@@ -3,8 +3,8 @@ const { resolve } = require('path')
 const schedule = require("node-schedule");
 const parser = require('./parser')
 
-// 每三秒种
-const interval = '* 0/1 * * * *'
+// 每小时秒种
+const interval = '0 0 0/1 * * ? *'
 
 // 每十分钟
 // const interval = '* */10 * * * *'
@@ -64,6 +64,7 @@ const job = async () => {
 
 
 // 每10秒触发一次
+job()
 schedule.scheduleJob(interval, job)
 
 
