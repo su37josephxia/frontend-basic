@@ -9,6 +9,9 @@ const parser = require('./parser')
 // 每十分钟
 const interval = '* */10 * * * *'
 
+// 每十秒钟
+// const interval = '*/10 * * * * *'
+
 const evaluate = () => {
     // 标题
     let title = document
@@ -54,8 +57,9 @@ const job = async () => {
         json = []
     }
     const result = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
-    console.log('JOB run：',result)
     result.createTime = new Date()
+    console.log(`========${result.createTime}=========`)
+    console.log('JOB run：',result)
     json.push(result)
 
     // 写入文件
@@ -64,7 +68,6 @@ const job = async () => {
 
 
 // 每10秒触发一次
-job()
 schedule.scheduleJob(interval, job)
 
 
