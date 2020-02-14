@@ -3,11 +3,11 @@ const { resolve } = require('path')
 const schedule = require("node-schedule");
 const parser = require('./parser')
 
-// 每小时秒种
-const interval = '0 0/1 * * * ? *'
+// 每种
+// const interval = '0 0/10 * * * ? *'
 
 // 每十分钟
-// const interval = '* */10 * * * *'
+const interval = '* */10 * * * *'
 
 const evaluate = () => {
     // 标题
