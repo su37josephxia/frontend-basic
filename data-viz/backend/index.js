@@ -4,7 +4,7 @@ const schedule = require("node-schedule");
 const parser = require('./parser')
 
 // 每三秒种
-const interval = '* * 0/1 * * *'
+const interval = '* 0/1 * * * *'
 
 // 每十分钟
 // const interval = '* */10 * * * *'
@@ -46,7 +46,7 @@ const evaluate = () => {
 }
 
 const job = async () => {
-    const dir = resolve(__dirname, '../log.json')
+    const dir = resolve(__dirname, '../log/log.json')
     let json
     try {
         json = fs.readJSONSync(dir)
