@@ -4,7 +4,7 @@ const schedule = require("node-schedule");
 const parser = require('./parser')
 
 // 每小时秒种
-const interval = '0 0 0/1 * * ? *'
+const interval = '0 0/1 * * * ? *'
 
 // 每十分钟
 // const interval = '* */10 * * * *'

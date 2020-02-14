@@ -8,6 +8,7 @@
 
     <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.5.11/dist/g2.min.js"></script>
     <script src="https://unpkg.com/@antv/data-set"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
     <!-- <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.5.11/dist/g2.min.js'g2-plugin-slider']"></script> -->
 </head>
 
@@ -15,130 +16,585 @@
     <div id='c1'></div>
     <script>
         const data = [{
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:26.920Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:29.846Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:32.731Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:35.593Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:38.777Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:41.944Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:22:44.754Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:30:19.027Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "472",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:31:14.212Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "518",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:37:52.670Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "518",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:38:02.346Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "518",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:40:14.076Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "518",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:40:51.711Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "518",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:41:34.597Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "565",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:50:11.450Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "565",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:50:44.019Z"
-            }, {
-                "author": "su37josephxia",
-                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
-                "view": "565",
-                "commment": "5",
-                "praise": "16",
-                "createTime": "2020-02-13T08:51:06.962Z"
-            }
-
-        ];
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:18:11.788Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:01.664Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:08.431Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:15.838Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:22.344Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:28.962Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:35.496Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:42.022Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:48.278Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:54.233Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:20:59.482Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:05.433Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:12.087Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:19.312Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:25.039Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:31.398Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:37.421Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:43.256Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:49.505Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:21:55.204Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:00.985Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:07.404Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:13.996Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:21.371Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:27.283Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:32.928Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:39.400Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:46.168Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:52.499Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:22:58.296Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:04.723Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:10.271Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:16.062Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:23.299Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:29.174Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:34.569Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:41.055Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:46.972Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:53.343Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:23:58.971Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:05.599Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:11.091Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:16.915Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:24.522Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:31.027Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:37.471Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:42.603Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:48.369Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:24:54.344Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:00.892Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:06.546Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:12.402Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:18.909Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:26.433Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:31.895Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:37.172Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:43.391Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "726",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:49.414Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:25:55.916Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:02.363Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:08.907Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:15.261Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:20.940Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:28.424Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:34.424Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:40.052Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:45.407Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:51.093Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:26:56.966Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:03.390Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:10.499Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:17.071Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:23.542Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:29.641Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:35.063Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:40.827Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:46.369Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:52.192Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:27:57.766Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:28:03.358Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:28:10.064Z"
+        }, {
+            "author": "su37josephxia",
+            "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+            "view": "845",
+            "commment": "5",
+            "praise": "20",
+            "createTime": "2020-02-14T04:28:16.291Z"
+        }];
         const ds = new DataSet();
         const dv = ds.createView().source(data);
         // fold 方式完成了行列转换，如果不想使用 DataSet 直接手工转换数据即可
+
+
         dv
             // .transform({
             //     type: 'partition',
@@ -146,12 +602,35 @@
             //     orderBy: ['month'] // 以month字段进行排序
             // })
             .transform({
+                type: 'map',
+                callback(row) { // 加工数据后返回新的一行，默认返回行数据本身
+                    row['createTime'] = moment(row['createTime']).format('MM/DD h:mm')
+                    console.log('createTime', moment(row['createTime']).format('MM/DD h:mm'))
+                    return row;
+                }
+            })
+
+            // .transform({
+            //     type: 'partition',
+            //     groupBy: ['createTime'], // 以year字段进行分组
+            //     // orderBy: ['createTime'] // 以month字段进行排序
+            // })
+
+            .transform({
+                type: 'aggregate', // 别名summary
+                fields: ['view', 'commment', 'praise'], // 统计字段集
+                operations: ['max', 'max', 'max'], // 统计操作集
+                as: ['view', 'commment', 'praise'],
+                groupBy: ['createTime'] // 分组字段集
+            })
+
+            .transform({
                 type: 'fold',
                 fields: ['view', 'commment', 'praise'], // 展开字段集
                 key: 'type', // key字段
                 value: 'number' // value字段
             });
-
+        console.log('加工数据', dv)
         // G2 对数据源格式的要求，仅仅是 JSON 数组，数组的每个元素是一个标准 JSON 对象。
         const chart = new G2.Chart({
             container: 'c1',
