@@ -1,13 +1,4 @@
-const fs = require('fs-extra')
-const { resolve } = require('path')
-const schedule = require("node-schedule");
 const parser = require('./parser')
-
-// 每三秒种
-const interval = '*/3 * * * * *'
-
-// 每十分钟
-// const interval = '* */10 * * * *'
 
 const evaluate = () => {
     // 标题
@@ -44,26 +35,7 @@ const evaluate = () => {
         praise
     }
 }
-
-const job = async () => {
-    const dir = resolve(__dirname, '../log.json')
-    let json
-    try {
-        json = fs.readJSONSync(dir)
-    } catch (e) {
-        json = []
-    }
-    const result = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
-    console.log('JOB run：',result)
-    result.createTime = new Date()
-    json.push(result)
-
-    // 写入文件
-    fs.writeJsonSync(dir, json)
-}
-
-
-// 每10秒触发一次
-schedule.scheduleJob(interval, job)
-
-
+setTimeout(async () => {
+    const ret = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
+    console.log('ret:', ret)
+})

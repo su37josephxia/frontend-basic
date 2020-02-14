@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掘金数据可视化</title>
+
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.5.11/dist/g2.min.js"></script>
+    <script src="https://unpkg.com/@antv/data-set"></script>
+    <!-- <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.5.11/dist/g2.min.js'g2-plugin-slider']"></script> -->
+</head>
+
+<body>
+    <div id='c1'></div>
+    <script>
+        const data = [{
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:26.920Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:29.846Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:32.731Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:35.593Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:38.777Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:41.944Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:22:44.754Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:30:19.027Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "472",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:31:14.212Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "518",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:37:52.670Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "518",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:38:02.346Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "518",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:40:14.076Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "518",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:40:51.711Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "518",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:41:34.597Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "565",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:50:11.450Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "565",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:50:44.019Z"
+            }, {
+                "author": "su37josephxia",
+                "title": "从0到1开发一个开源项目(TS + ESlint + Jest + TravisCI)",
+                "view": "565",
+                "commment": "5",
+                "praise": "16",
+                "createTime": "2020-02-13T08:51:06.962Z"
+            }
+
+        ];
+        const ds = new DataSet();
+        const dv = ds.createView().source(data);
+        // fold 方式完成了行列转换，如果不想使用 DataSet 直接手工转换数据即可
+        dv
+            // .transform({
+            //     type: 'partition',
+            //     groupBy: ['year'], // 以year字段进行分组
+            //     orderBy: ['month'] // 以month字段进行排序
+            // })
+            .transform({
+                type: 'fold',
+                fields: ['view', 'commment', 'praise'], // 展开字段集
+                key: 'type', // key字段
+                value: 'number' // value字段
+            });
+
+        // G2 对数据源格式的要求，仅仅是 JSON 数组，数组的每个元素是一个标准 JSON 对象。
+        const chart = new G2.Chart({
+            container: 'c1',
+            forceFit: true,
+            height: 500
+        });
+        console.log('dv')
+        chart.source(dv);
+        // chart.scale('value', {
+        //     min: 0
+        // });
+        // chart.scale('year', {
+        //     range: [0, 1]
+        // });
+        chart.tooltip({
+            crosshairs: {
+                type: 'line'
+            }
+        });
+        chart.line()
+            .position('createTime*number')
+            .color('type')
+            .size(1)
+            .shape('circle')
+
+            .style({
+                stroke: '#fff',
+                lineWidth: 1
+            });
+
+
+
+        chart.render();
+
+
+        // const slider = new Slider({
+        //     container: 'slider', // dom 容器 id 或者 dom 容器对象
+        //     width: 600, // slider 的宽度，默认为 'auto'，即自适应宽度
+        //     height: 26, // slider 的高度，默认为 '26px'
+        //     padding: [20, 120, 100], // slider 所在画布 canvas 的内边距，用于对齐图表，默认与图表默认的 padding 相同
+        //     start: '2015-04-07', // 和状态量对应，滑块的起始点数值，如果是时间类型，建议将其转换为时间戳，方便数据过滤
+        //     end: '2015-08-01', // 和状态量对应，滑块的结束点数值，如果是时间类型，建议将其转换为时间戳，方便数据过滤
+        //     minSpan: 30 * 24 * 60 * 60 * 1000, // 可选，用于设置滑块的最小范围，时间类型的数值必须使用时间戳，这里设置最小范围为 30 天
+        //     maxSpan: 120 * 24 * 60 * 60 * 1000, // 可选，用于设置滑块的最大范围，时间类型的数值必须使用时间戳，这里设置最大范围为 120 天
+        //     data: [], // slider 的数据源
+        //     xAxis: 'time', // 背景图的横轴对应字段，同时为数据筛选的字段
+        //     yAxis: 'volumn', // 背景图的纵轴对应字段
+        //     onChange: ({
+        //         startValue,
+        //         endValue
+        //     }) => {
+        //         ds.setState('start', startValue);
+        //         ds.setState('end', endValue);
+        //     } // 更新数据状态量的回调函数
+        // });
+        // slider.render(); // 渲染
+    </script>
+
+</body>
+
+</html>
