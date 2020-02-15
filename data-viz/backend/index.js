@@ -7,10 +7,10 @@ const parser = require('./parser')
 // const interval = '*/10 * * * * ? *'
 
 // 每十分钟
-// const interval = '* */10 * * * *'
+const interval = '* */10 * * * *'
 
 // 每十秒钟
-const interval = '*/10 * * * * *'
+// const interval = '*/10 * * * * *'
 
 const evaluate = () => {
     // 标题
