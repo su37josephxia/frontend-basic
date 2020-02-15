@@ -4,13 +4,13 @@ const schedule = require("node-schedule");
 const parser = require('./parser')
 
 // 每种
-// const interval = '0 0/10 * * * ? *'
+// const interval = '*/10 * * * * ? *'
 
 // 每十分钟
-const interval = '* */10 * * * *'
+// const interval = '* */10 * * * *'
 
 // 每十秒钟
-// const interval = '*/10 * * * * *'
+const interval = '*/10 * * * * *'
 
 const evaluate = () => {
     // 标题
@@ -56,8 +56,17 @@ const job = async () => {
     } catch (e) {
         json = []
     }
-    const result = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
-    result.createTime = new Date()
+    let result 
+    try {
+        result = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
+        result.createTime = new Date()
+    } catch (error) {
+        console.log('Catch Error',error)
+        
+    }
+    
+    
+    
     console.log(`========${result.createTime}=========`)
     console.log('JOB run：',result)
     json.push(result)
