@@ -15,6 +15,5 @@ module.exports = {
             warning: true,
             errors: true
         }
-    },
-    lintOnSave: false
+    }
 }

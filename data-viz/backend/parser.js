@@ -10,11 +10,22 @@ const parser = async (url, evaluate) => {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     }));
-    const page = await browser.newPage();
-    await page.goto(url);
-    const ret = await page.evaluate(evaluate)
-    browser.close();
-    return ret
+    let ret = {}
+    try {
+        const page = await browser.newPage();
+        await page.goto(url);
+        console.log('evaluate...')
+        ret = await page.evaluate(evaluate)
+
+        browser.close();
+        
+    } catch (error ){
+        console.log('Chrome error :',error)
+    }
+    finally {
+        browser.close();
+        return ret
+    }
 }
 
 // setTimeout(async () => {

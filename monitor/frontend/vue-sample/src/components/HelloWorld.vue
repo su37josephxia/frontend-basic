@@ -38,7 +38,8 @@ export default {
   },
   mounted(){
     //制造一个错误
-    abc()
+    // abc()
+    console.log('abc')
   }
 }
 </script>

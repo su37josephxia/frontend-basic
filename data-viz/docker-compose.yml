@@ -1,0 +1,36 @@
+version: "3"
+services:
+  elasticsearch:
+    image: docker.io/elasticsearch:5.6.5
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    container_name: elasticsearch565
+    hostname: elasticsearch
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  kibana:
+    image: docker.io/kibana:5.6.5
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    container_name: kibana565
+    hostname: kibana
+    depends_on:
+      - elasticsearch
+    restart: always
+    ports:
+      - "5601:5601"
+  # filebeat:
+  #     image: elastic/filebeat:lastest
+  #     volumes:
+  #       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+  #       - ./log:/tmp
+  #     container_name: filebeat565
+  #     hostname: filebeat
+  #     restart: always
+  #     privileged: true
+  #     depends_on:
+  #       - elasticsearch

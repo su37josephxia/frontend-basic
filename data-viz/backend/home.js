@@ -1,3 +1,5 @@
+
+
 const fs = require('fs-extra')
 const { resolve } = require('path')
 const schedule = require("node-schedule");
@@ -10,54 +12,39 @@ const parser = require('./parser')
 const interval = '* */10 * * * *'
 
 // 每十秒钟
-// const interval = '*/10 * * * * *'
+// const interval = '*/3 * * * * *'
 
 const evaluate = () => {
-    // 标题
-    let title = document
-        .querySelector('.article-title')
-        .innerText
-
     // 作者
     let author = document
-        .querySelector('.author-info-box .username')
+        .querySelector('.username')
         .innerText
     // 浏览数
     let view = document
-        .querySelector('.views-count')
-        .innerText
-        .split(' ')[1]
+        .querySelectorAll('.stat-item .count')[4]
+        .innerHTML.replace(',', '')
 
     // 点赞数
-    let commment = document
-        .querySelector('.action-bar .comment-action .action-title')
-        .innerHTML
+    let praise = document.querySelectorAll('.stat-item .count')[5]
+        .innerHTML.replace(',', '')
 
-
-    // 留言数
-    let praise = document
-        .querySelector('.action-bar .praise-action .action-title')
-        .innerHTML
 
     return {
         author,
-        title,
         view,
-        commment,
         praise
     }
 }
 
 const job = async () => {
-    const dir = resolve(__dirname, '../log/log.json')
+    const dir = resolve(__dirname, '../log/home.json')
     let json
     try {
         json = fs.readJSONSync(dir)
     } catch (e) {
         json = []
     }
-    const result = await parser(`https://juejin.im/post/5e43c16df265da575918cdb6`, evaluate)
-    // const result = await parser(`https://abc1231`, evaluate)
+    const result = await parser(`https://juejin.im/user/593e0a32a0bb9f006b560bad`, evaluate)
     result.createTime = new Date()
     console.log(`========${result.createTime}=========`)
 
@@ -75,7 +62,7 @@ schedule.scheduleJob(interval, async () => {
         await job()
         console.log('=========success=======')
     } catch (error) {
-        console.log('schedule Error',error)
+        console.log('schedule Error', error)
     }
 })
 
