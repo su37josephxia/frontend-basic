@@ -5,25 +5,25 @@ const logTime = (name) => {
 const delay = 1000
 
 // CallBack 
-setTimeout(() => {
-    logTime('Callback')
-    setTimeout(() => {
-        logTime('Callback')
-    }, delay)
-}, delay)
+// setTimeout(() => {
+//     logTime('Callback')
+//     setTimeout(() => {
+//         logTime('Callback')
+//     }, delay)
+// }, delay)
 
 
-// Promise
+// // Promise
 let promise = (name, delay = 1000) => new Promise(resolve => {
     setTimeout(() => {
         resolve()
         logTime(name)
     }, delay)
 })
-promise('Promise1')
-    .then(() => {
-        promise('Promise2')
-    }).then(promise('Promise3'))
+// promise('Promise1')
+//     .then(() => {
+//         promise('Promise2')
+//     }).then(promise('Promise3'))
 
 // Generator 和 yield 和 iterator
 const generator = function* (name) {
@@ -36,32 +36,32 @@ gen.next().value.then(() => {
 })
 
 // 自己实现一个同步调用的CO
-let co = function(gen,name) {
-    var it = gen(name);
-    var ret = it.next();
-    ret.value.then(function(res) {
-        it.next(res);
-    });
-}
-co(generator,'CO');
+// let co = function(gen,name) {
+//     var it = gen(name);
+//     var ret = it.next();
+//     ret.value.then(function(res) {
+//         it.next(res);
+//     });
+// }
+// co(generator,'CO');
 
-// co库 thunkify库组合 实现异步调用
-co = require('co')
-const Thunkify = require("thunkify");
-const thunkify = Thunkify((name,callback) =>{
-    setTimeout(() => {
-        logTime(name)
-        callback()
-    })
-})
-co(function* (){
-    yield thunkify('CO/thunkify')
-    yield thunkify('CO/thunkify')
-});
+// // co库 thunkify库组合 实现异步调用
+// co = require('co')
+// const Thunkify = require("thunkify");
+// const thunkify = Thunkify((name,callback) =>{
+//     setTimeout(() => {
+//         logTime(name)
+//         callback()
+//     })
+// })
+// co(function* (){
+//     yield thunkify('CO/thunkify')
+//     yield thunkify('CO/thunkify')
+// });
 
 
-// Async和Await组合
-(async() => {
-    await promise('Async/await')
-    await promise('Async/await')
-})()
+// // Async和Await组合
+// (async() => {
+//     await promise('Async/await')
+//     await promise('Async/await')
+// })()
