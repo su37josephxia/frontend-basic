@@ -1,70 +1,90 @@
-const fs = require('fs')
+// const fs = require('fs')
 const path = require('path')
 module.exports = class TestNow {
-    static genJestSource(sourcePath = resolve('./')) {
+    constructor() {
+        this.fs = require('fs')
+    }
+
+    /**
+     * 生成Jest测试代码
+     * @param {*} sourcePath 
+     */
+    genJestSource(sourcePath = resolve('./')) {
         const testPath = `${sourcePath}/__test__`
-        if (!fs.existsSync(testPath)) {
-            fs.mkdirSync(testPath)
+        if (!this.fs.existsSync(testPath)) {
+            this.fs.mkdirSync(testPath)
         }
 
         // 遍历代码文件
-        let list = fs.readdirSync(sourcePath)
-
+        let list = this.fs.readdirSync(sourcePath)
         list
             // 添加完整路径
             .map(v => `${sourcePath}/${v}`)
             // 过滤文件
-            .filter(v => fs.statSync(v).isFile())
+            .filter(v => this.fs.statSync(v).isFile())
             // 排除测试代码
             .filter(v => v.indexOf('.spec') === -1)
-            .map(TestNow.genCode)
+            .map(v => this.genTestFile(v))
     }
-    static genCode(filename) {
 
-        console.log('filename:' + filename)
-
-        // const testSousrceName =
-        // testSourceName = `${dirname(filename)}/__test__/${basename(filename)}`
+    /**
+     * 生成测试文件
+     * @param {*} filename 
+     */
+    genTestFile(filename) {
+        console.log('genTestFile:' + filename)
+        const testFileName = this.getTestFileName(filename)
 
         // 判断是否存在此文件
-        if (fs.existsSync(filename)) {
+        if (this.fs.existsSync(testFileName)) {
+            console.log('该测试代码已存在')
             return
         }
 
         const module = require(filename)
+        let source
         if (typeof module === 'object') {
-
-            const ary = Object.keys(module).forEach(genCase)
-            fs.writeFileSync(filename, ary.join('\n'))
+            source = Object.keys(module).map(v => this.getTestSource(v, path.basename(filename), true))
+                .join('\n')
         } else if (typeof module == 'function') {
-            genCase(basename(filename).replace('.js', ''))
+            const basename = path.basename(filename)
+            source = this.getTestSource(basename.replace('.js', ''), basename)
         }
+        this.fs.writeFileSync(testFileName, source)
     }
 
-    static genCase(method) {
-        console.log('case ', method)
+    /**
+     * 生成测试代码
+     * @param {*} methodName 
+     * @param {*} classFile 
+     * @param {*} isClass 
+     */
+    getTestSource(methodName, classFile, isClass = false) {
+        console.log('getTestSource: ', methodName)
 
-        const template = `
-            test('${'TEST ' + method}',() => {
-                const ${method} = ${method}()
-            })
+        return `
+test('${'TEST ' + methodName}',() => {
+    const  ${isClass ? '{' + methodName + '}' : methodName} = require('${'../' + classFile}')
+    const ret = ${methodName}()
+    // expect(ret)
+    //     .toBe('test ret')
+})
         `
-        return template
     }
 
     /**
      * 生成测试文件名
      * @param {*} filename 
      */
-    static getTestFileName(filename) {
+    getTestFileName(filename) {
         const dirName = path.dirname(filename)
         const baseName = path.basename(filename)
         const extname = path.extname(filename)
         const testName = baseName.replace(extname, `.spec${extname}`)
 
         return path.format({
-            dir: dirName,
-            base : testName
+            root: dirName + '/__test__/',
+            base: testName
         })
     }
 }
