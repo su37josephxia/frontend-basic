@@ -1,5 +1,7 @@
 test('测试Export', () => {
-    const string = require('../index')
-    console.log('export', string)
+    const ret = require('../index')
+    console.log('export', ret)
+    expect(ret)
+        .toBe('helloworld')
 })
 

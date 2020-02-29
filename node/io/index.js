@@ -31,3 +31,4 @@ exports.imageUrl = () => {
     fs.writeFileSync(`${__dirname}/index.html`,`<img src='${uri}' />`)
     // console.log(uri)
 }
+

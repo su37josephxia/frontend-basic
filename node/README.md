@@ -6,15 +6,9 @@
 
 ## 最简短的开场白
 
-### API这里不讲
-
-看官网就够了
-
-https://nodejs.org/dist/latest-v10.x/docs/api/
-
-主要会讲你过不去的坎
-
 ### Node是什么
+
+- 用于编写服务器端应用
 
 - JavaScript核心语法
 
@@ -22,14 +16,20 @@ https://nodejs.org/dist/latest-v10.x/docs/api/
 
   | 前端 | DOM                  | 文档对象   |
   | ---- | -------------------- | ---------- |
-  |      | BOM                  | 浏览器对象 |
+  |      | BOM/DOM              | 浏览器对象 |
   |      | XMLHttpRequest/fetch | 网络通讯   |
   | 后端 | os                   | 操作系统   |
   |      | process              | 进程       |
   |      | fs                   | 文件系统   |
   |      | net                  | 网络通讯   |
 
+### API哪里找
 
+英文 https://nodejs.org/dist/latest-v10.x/docs/api/
+
+中文 http://nodejs.cn/api/
+
+### 
 
 ## 运行/调试/模块 - 如何搭建万里长城
 
@@ -39,7 +39,7 @@ https://nodejs.org/dist/latest-v10.x/docs/api/
 console.log('hello world')
 ```
 
-bash运行
+### bash运行
 
 ```bash
 node helloworld/index.js
@@ -55,8 +55,6 @@ node helloworld
 npm i nodemon -g
 nodemon helloworld
 ```
-
-
 
 ### Vscode调试debug
 
@@ -85,7 +83,7 @@ jest helloworld
 
 
 
-### Export与Require
+### Exports与Require
 
 ```js
 const str = 'helloworld'
@@ -105,6 +103,73 @@ it('测试Export', () => {
 })
 
 ```
+
+### 测试代码生成工具
+
+>- 掌握fs中的同步方法
+>
+>- path包
+
+### 生成测试文件名
+
+```js
+test('测试文件名称',() => {
+    const src = new (require('../index'))()
+    const ret = src.getTestFileName('/abc/class.js')
+    console.log('getSourceName',ret)
+    expect(ret)
+    .toBe('/abc/__test__/class.spec.js')
+})
+```
+
+
+
+```js
+const path = require('path')
+module.exports = class TestNow {
+		/**
+     * 生成测试文件名
+     * @param {*} filename 
+     */
+    getTestFileName(filename) {
+        const dirName = path.dirname(filename)
+        const baseName = path.basename(filename)
+        const extname = path.extname(filename)
+        const testName = baseName.replace(extname, `.spec${extname}`)
+
+        return path.format({
+            root: dirName + '/__test__/',
+            base: testName
+        })
+    }
+}
+```
+
+
+
+#### 生成测试代码
+
+```js
+test('生成测试代码', () => {
+    const src = new (require('../index'))()
+    const ret = src.getTestSource('fun','class')
+    expect(ret)
+        .toBe(
+            `
+test('TEST fun',() => {
+    const  fun = require('../class')
+    const ret = fun()
+    // expect(ret)
+    //     .toBe('test ret')
+})
+        `
+        )
+})
+```
+
+
+
+
 
 
 
@@ -128,13 +193,7 @@ it('测试Export', () => {
 
 ## IO处理
 
-### 文件系统FS
-
-
-
 ### 同步与异步读取文件
-
-
 
 > 补充资料 https://nodejs.org/dist/latest-v10.x/docs/api/fs.html
 
@@ -164,15 +223,25 @@ it('测试Export', () => {
 | fs.write     | 写入数据到一个文件                                         |
 | fs.read      | 读取一个文件的数据                                         |
 
-
-
-
-
 ### Promisify
 
 
 
 ### buffer -  操作二进制数据
+
+### 生成Base64编码
+
+```
+exports.imageUrl = () => {
+    const mime = 'image/png'
+    const encoding = 'base64'
+    const base64Data = fs.readFileSync(`${__dirname}/image.png`).toString(encoding)
+    const uri = `data:${mime};${encoding},${base64Data}`
+    // data:image/png;base64,
+    fs.writeFileSync(`${__dirname}/index.html`,`<img src='${uri}' />`)
+    // console.log(uri)
+}
+```
 
 
 
@@ -189,35 +258,56 @@ it('测试Export', () => {
 - `fs.readFile` 阻止程序阻塞，但仍会将文件所有数据读取到内存中
 - 希望少内存读取大文件，读取一个数据块到内存处理完再去索取更多的数据
 
-
-
-### 模板引擎
-
-
-
-文件系统 - FS
-
-
-
 ## 进程/子进程
 
+process
 
 
 
-
-## 有趣的应用
-
-
-
-### 测试代码生成工具
-
-
+```js
+// 查看PATH
+console.log(process.env.PATH.split(':').join('\n'));
+console.log(`arch:${process.arch}`)
+console.log(`platform:${process.platform}`)
+console.log(`获取内存使用情况 memoryUsage:${process.memoryUsage()}`)
+console.log(`获取命令行参数 argv:${process.argv}`)
+```
 
 
 
 
 
 #### 自动重启工具（Nodemon）
+
+```js
+const fs = require('fs')
+const { spawn } = require('child_process')
+const { resolve } = require('path')
+function watch() {
+    const [cmd, , source, ...argv] = process.argv
+    // console.log('abc', cmd, source, argv)
+    const childProcess = spawn(cmd, [source, ...argv])
+    childProcess.stdout.pipe(process.stdout)
+    childProcess.stderr.pipe(process.stderr)
+    const watcher = fs.watch(resolve(__dirname, source), () => {
+        console.log('File changed, reloading.')
+        childProcess.kill()
+        watcher.close()
+        watch()
+    })
+}
+watch()
+
+
+```
+
+
+
+
+
+
+
+
 
 
 
