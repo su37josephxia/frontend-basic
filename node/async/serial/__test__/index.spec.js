@@ -2,11 +2,11 @@ const { callback, promise, generator, asyncAwait,event } = require('../index')
 
 describe('异步', () => {
 
-    // test('callback', done => {
-    //     callback()
-    //     // 延时4s结束
-    //     setTimeout(done, 1000)
-    // })
+    test('callback', done => {
+        callback()
+        // 延时4s结束
+        setTimeout(done, 1000)
+    })
 
     // test('promise', done => {
     //     promise()

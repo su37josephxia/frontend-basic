@@ -194,6 +194,10 @@ test('TEST fun',() => {
 > 回调地域太可怕
 
 ```js
+const logTime = (name) => {
+    console.log(`Log....${name}   ` + new Date().toLocaleTimeString())
+}
+
 exports.callback = () => {
     setTimeout(() => {
         logTime('callback 1')
@@ -203,6 +207,18 @@ exports.callback = () => {
     }, 100)
 }
 ```
+
+测试代码
+
+```js
+test('callback', done => {
+  callback()
+  // 延时4s结束
+  setTimeout(done, 1000)
+})
+```
+
+
 
 
 
