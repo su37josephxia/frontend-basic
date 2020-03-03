@@ -4,7 +4,6 @@ describe('异步', () => {
 
     // test('callback', done => {
     //     callback()
-
     //     // 延时4s结束
     //     setTimeout(done, 1000)
     // })
@@ -17,6 +16,7 @@ describe('异步', () => {
     // })
 
     // test('generator',done => {
+    //     const {generator} = require('../index')
     //     generator()
     //     setTimeout(done, 1000)
     // })

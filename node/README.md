@@ -173,19 +173,259 @@ test('TEST fun',() => {
 
 ## 事件/异步 - 如何控制好异步过程
 
-### callback
+> 参考资料 [阮一峰 Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous＿javascript.html))
 
-### setTimeout
 
-### gennerator
 
-### async/await
+- JS的执行环境是单线程（Single thread）
 
-### eventEmmiter/订阅发布机制
+- I/O处理需要回调函数异步处理 (异步I/O)
+- 前端异步IO可以消除UI阻塞，提高用户体验
+- 而放在后端则可以提高CPU和内存里利用率
 
-### eventEimitter源码
+
+
+### 串联异步处理
+
+异步操作队列化，按照期望的顺序执行。
+
+#### Callback
+
+> 回调地域太可怕
+
+```js
+exports.callback = () => {
+    setTimeout(() => {
+        logTime('callback 1')
+        setTimeout(() => {
+            logTime('callback 2')
+        }, 100)
+    }, 100)
+}
+```
+
+
+
+#### Promise
+
+> The Promise object is used for asynchronous computations. A Promise represents a single asynchronous operation that hasn't completed yet, but is expected in the future.
+>
+> 译文：Promise对象用于异步操作，它表示一个尚未完成且预计在未来完成的异步操作。
+
+说白了就是一个异步执行的状态机，异步执行的承诺。
+
+```js
+const promise = (name, delay = 100) => new Promise(resolve => {
+    setTimeout(() => {
+        logTime(name)
+        resolve()
+    }, delay)
+})
+
+exports.promise = () => {
+
+    promise('Promise1')
+        .then(promise('Promise2'))
+        .then(promise('Promise3'))
+        .then(promise('Promise4'))
+}
+```
+
+
+
+#### Gennerator
+
+> ES6 新引入了 Generator 函数，可以通过 yield 关键字，把函数的执行流挂起，为改变执行流程提供了可能，从而为异步编程提供解决方案。 基本
+
+- function -> function* 称为Gennerator函数
+- 函数内部有 yield 表达式。
+
+```js
+function* func() {
+    console.log("one");
+    yield '1';
+    console.log("two");
+    yield '2';
+    console.log("three");
+    return '3';
+}
+
+const f = func()
+f.next();
+// one
+// {value: "1", done: false}
+f.next();
+// two
+// {value: "2", done: false}
+f.next();
+// three
+// {value: "3", done: true}
+f.next();
+// {value: undefined, done: true}
+
+// 或者通过迭代器
+for (const [key,value] of func()) {
+    console.log(`${key}: ${value}`);
+}
+
+```
+
+
+
+##### 逻辑代码
+
+```js
+let co = function (gen, name) {
+    var it = gen(name)
+    var ret = it.next()
+    ret.value.then(function (res) {
+        it.next(res)
+    })
+}
+exports.generator = () => {
+    const generator = function* (name) {
+        yield promise(name + 1)
+        yield promise(name + 2)
+        yield promise(name + 3)
+        yield promise(name + 4)
+    }
+    let co = generator => {
+        if (it = generator.next().value) {
+            it.then(res => {
+                co(generator)
+            })
+        } else {
+            return
+        }
+    }
+    co(generator('Co-Generator'))
+}
+```
+
+
+
+#### async/await
+
+>  async/await是es7推出的一套关于异步的终极解决方案
+
+- 任何一个await语句后面的 Promise 对象变为reject状态，那么整个async函数都会中断执行。
+- async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
+
+```js
+exports.asyncAwait = async () => {
+    await promise('Async/Await1')
+    await promise('Async/Await2')
+    await promise('Async/Await3')
+    await promise('Async/Await4')
+}
+```
+
+
+
+#### 事件监听方式处理
+
+采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。
+
+```js
+exports.event = async () => {
+    const asyncFun = name => event => {
+        setTimeout(() => {
+            logTime(name)
+            event.emit('end')
+        }, 100)
+        return event
+    }
+
+    const ary = [
+        asyncFun('event1'),
+        asyncFun('event2'),
+        asyncFun('event3')
+    ]
+
+    const { EventEmitter } = require('events')
+    const event = new EventEmitter()
+    let i = 0
+    event.on('end', () => i < ary.length && ary[i++](event))
+    event.emit('end')
+
+}
+
+```
+
+
+
+#### eventEmmiter
+
+```js
+const promise = (name, delay = 100) => new Promise(resolve => {
+    setTimeout(() => {
+        logTime(name)
+        resolve()
+    }, delay)
+})
+
+exports.promise = () => {
+
+    promise('Promise1')
+        .then(promise('Promise2'))
+        .then(promise('Promise3'))
+        .then(promise('Promise4'))
+}
+```
+
+
+
+#### 扩展阅读eventEimitter源码解析 / 订阅发布机制
+
+```js
+class EventEmitter {
+    constructor() {
+        this.handler = {};
+    }
+    on(eventName, callback) {
+        if (!this.handles) {
+            this.handles = {};
+        }
+        if (!this.handles[eventName]) {
+            this.handles[eventName] = [];
+        }
+        this.handles[eventName].push(callback);
+    }
+    emit(eventName, ...arg) {
+        if (this.handles[eventName]) {
+            for (var i = 0; i < this.handles[eventName].length; i++) {
+                this.handles[eventName][i](...arg);
+            }
+        }
+
+    }
+}
+
+const event = new EventEmitter(); 
+event.on('some_event', num =>  { 
+    console.log('some_event 事件触发:'+num); 
+}); 
+let num = 0
+setInterval(() =>  { 
+    event.emit('some_event' , num ++ ); 
+}, 1000); 
+```
+
+
+
+
+
+### 异步处理并行
+
+
 
 ### promisify
+
+
+
+
+
+
 
 
 
@@ -253,8 +493,12 @@ exports.imageUrl = () => {
 理解流的最好方式就是想象一下没有流的时候怎么处理数据：
 
 - `fs.readFileSync` 同步读取文件，程序会阻塞，所有数据被读到内存
+
 - `fs.readFile` 阻止程序阻塞，但仍会将文件所有数据读取到内存中
+
 - 希望少内存读取大文件，读取一个数据块到内存处理完再去索取更多的数据
+
+  
 
 ## 进程/子进程
 

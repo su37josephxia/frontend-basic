@@ -25,13 +25,7 @@ exports.promise = () => {
         .then(promise('Promise3'))
         .then(promise('Promise4'))
 }
-let co = function (gen, name) {
-    var it = gen(name)
-    var ret = it.next()
-    ret.value.then(function (res) {
-        it.next(res)
-    })
-}
+
 exports.generator = () => {
     const generator = function* (name) {
         yield promise(name + 1)
@@ -48,7 +42,6 @@ exports.generator = () => {
             return
         }
     }
-
     co(generator('Co-Generator'))
 }
 
