@@ -171,7 +171,7 @@ test('TEST fun',() => {
 
 
 
-## 事件/异步 - 如何控制好异步过程
+## 异步编程 - 如何控制好异步过程
 
 > 参考资料 [阮一峰 Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous＿javascript.html))
 
@@ -530,8 +530,6 @@ console.log(`platform:${process.platform}`)
 console.log(`获取内存使用情况 memoryUsage:${process.memoryUsage()}`)
 console.log(`获取命令行参数 argv:${process.argv}`)
 ```
-
-
 
 
 

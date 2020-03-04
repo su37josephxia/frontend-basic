@@ -89,6 +89,61 @@
 
   使用一种全局唯一的字符串作为主键，类似`8f55d96b-8acc-4636-8cb8-76bf8abc2f57`。GUID算法通过网卡MAC地址、时间戳和随机数保证任意计算机在任意时间生成的字符串都是不同的，大部分编程语言都内置了GUID算法，可以自己预算出主键。
 
+## MySQL
+
+### 连接/退出
+
+`mysql -h localhost -u root -P 3306 -p`
+ **-h**：跟上数据库ip地址（localhost表示本机地址127.0.0.1）
+ **-u**：mysql数据库登录名称。（root：表示超级管理员）
+ **-P**：跟上数据库端口号（默认：3306，所以 **-P** 可以省略）
+ **-p**：跟上mysql数据库密码（这里不推荐直接跟在 **-p** 后面，回车之后再书写）
+
+
+
+```bash
+# 连接
+mysql -h localhost -u root -pexample 
+
+# 退出
+exit
+```
+
+
+
+### 创建 DataBase
+
+```bash
+CREATE DATABASE 数据库名称;
+# eg:
+CREATE DATABASE test;
+
+# 创建并指定编码和排序规则
+CREATE DATABASE `mydb` CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+
+
+
+### 选择数据库
+
+```bash
+use 数据库名称;
+# eg:
+use test;
+```
+
+
+
+### 删除数据库
+
+```bash
+DROP DATABASE <数据库名称>;
+# eg:
+DROP test;
+```
+
+
+
 ## SQL
 
 >  SQL是结构化查询语言的缩写，用来访问和操作数据库系统。
@@ -107,37 +162,208 @@
 
 - 不同数据库间基本通用
 
-  
 
 ### 数据定义 
 
 > DDL：Data Definition Language
 
-- CREATE
-- INSERT
-- UPDATE
-- DROP
+#### CREATE - 创建表
+
+```sql
+CREATE TABLE IF NOT EXISTS TBL_RESULT(
+   id INT UNSIGNED AUTO_INCREMENT,
+   name VARCHAR(100) NOT NULL,
+   score INT UNSIGNED NOT NULL,
+   PRIMARY KEY ( id )
+);
+```
+
+结果验证
+
+```bash
+# 查询条
+show tables;
+========
+mysql> show tables;
++----------------+
+| Tables_in_user |
++----------------+
+| TBL_RESULT     |
++----------------+
+1 row in set (0.01 sec)
+
+# desc TBL_RESULT;
+=======
++-------+------------------+------+-----+---------+----------------+
+| Field | Type             | Null | Key | Default | Extra          |
++-------+------------------+------+-----+---------+----------------+
+| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(100)     | NO   |     | NULL    |                |
+| score | int(10) unsigned | NO   |     | NULL    |                |
++-------+------------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+```
+
+#### ALTER - 修改表结构
+
+```bash
+# 常用的语法格式如下：
+ALTER TABLE <表名> [修改选项]
+# 修改选项的语法格式如下：
+{ ADD COLUMN <列名> <类型>
+| CHANGE COLUMN <旧列名> <新列名> <新列类型>
+| ALTER COLUMN <列名> { SET DEFAULT <默认值> | DROP DEFAULT }
+| MODIFY COLUMN <列名> <类型>
+| DROP COLUMN <列名>
+| RENAME TO <新表名> }
+
+```
+
+```sql
+ALTER TABLE TBL_RESULT
+MODIFY COLUMN score INT(20) unsigned;
+```
+
+结果验证
+
+```bash
+mysql> desc TBL_RESULT;
++-------+------------------+------+-----+---------+----------------+
+| Field | Type             | Null | Key | Default | Extra          |
++-------+------------------+------+-----+---------+----------------+
+| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(100)     | NO   |     | NULL    |                |
+| score | int(20) unsigned | YES  |     | NULL    |                |
++-------+------------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+```
+
+#### DROP - 删除表结构
+
+```sql
+DROP TABLE TBL_RESULT;
+```
+
+结果验证
+
+```bash
+show tables;
+========
+mysql> show tables;
+Empty set (0.00 sec)
+```
 
 ### 数据操作 
 
 > DML：Data Manipulation Language
 
-- INSERT
-- UPDATE
-- DELETE
+#### INSERT
+
+```bash
+INSERT INTO TBL_RESULT (name,score) VALUES ('tom',20);
+```
+
+#### UPDATE
+
+```
+UPDATE TBL_RESULT SET score=80 WHERE name = 'tom';
+```
+
+#### DELETE
+
+```
+DELETE FROM TBL_RESULT WHERE name = 'tom';
+```
+
+#### TRUNCATE
+
+```bash
+TRUNCATE TABLE TBL_RESULT;
+```
 
 ### 数据查询
 
 > DQL：Data Query Language
 
-### 进阶操作
-
-#### 基础查询
+```
+INSERT INTO TBL_RESULT (name,score) VALUES ('李云龙',20);
+INSERT INTO TBL_RESULT (name,score) VALUES ('魏和尚',80);
+INSERT INTO TBL_RESULT (name,score) VALUES ('赵政委',100);
+```
 
 #### 条件查询
 
-#### 排序和分组
+```mysql
+SELECT name ,score 
+FROM TBL_RESULT
+WHERE score > 60
+ORDER BY score DESC;
+```
 
-#### 聚合查询
+#### 分组、聚合查询
+
+```
+# 平均分
+SELECT name ,AVG(score),SUM(score)
+FROM TBL_RESULT
+GROUP BY name;
+```
 
 #### 连接查询
+
+成绩表 TBL_RESULT
+
+| 学号 | 姓名   | 成绩 |
+| ---- | ------ | ---- |
+| 1    | 李云龙 | 60   |
+| 2    | 魏和尚 | 20   |
+| 3    | 赵政委 | 100  |
+
+职位表  TBL_POSITION
+
+| 姓名   | 职级   |
+| ------ | ------ |
+| 李云龙 | 团长   |
+| 赵政委 | 团副   |
+
+数据准备
+
+```js
+DROP TABLE TBL_POSITION;
+CREATE TABLE IF NOT EXISTS TBL_POSITION(
+   name VARCHAR(100) NOT NULL,
+   position VARCHAR(100)  NOT NULL,
+   PRIMARY KEY ( name )
+);
+INSERT INTO TBL_POSITION (name,position) VALUES ('李云龙','团级');
+INSERT INTO TBL_POSITION (name,position) VALUES ('赵政委','团副');
+```
+
+![image-20200304113426185](assets/image-20200304113426185.png)
+
+```mysql
+SELECT a.name,a.score,b.position
+FROM TBL_RESULT a
+LEFT JOIN TBL_POSITION b
+ON a.name = b.name;
+```
+
+结果
+
+```bash
++-----------+-------+----------+
+| name      | score | position |
++-----------+-------+----------+
+| 李云龙    |    20 | 团级     |
+| 赵政委    |   100 | 团副     |
+| 魏和尚    |    80 | NULL     |
++-----------+-------+----------+
+3 rows in set (0.00 sec)
+```
+
+
+
+### 进阶操作
+
+<待>
+
