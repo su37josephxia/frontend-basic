@@ -12,7 +12,7 @@
 
 如果想要用电脑存储可以考虑使用Excel 
 
-![image-20200303110303375](assets/image-20200303110303375.png)
+![image-20200303110303375](./assets/image-20200303110303375.png)
 
 但存在以下问题
 
@@ -44,7 +44,7 @@
 
 二维表的形式来存储数据的
 
-![image-20200303111840812](assets/image-20200303111840812.png)
+![image-20200303111840812](./assets/image-20200303111840812.png)
 
 - 表的每一行称为记录（Record），记录是一个逻辑意义上的数据。
 - 表的每一列称为字段（Column），同一个表的每一行记录都拥有相同的若干字段。每一行叫一条记录
@@ -339,7 +339,7 @@ INSERT INTO TBL_POSITION (name,position) VALUES ('李云龙','团级');
 INSERT INTO TBL_POSITION (name,position) VALUES ('赵政委','团副');
 ```
 
-![image-20200304113426185](assets/image-20200304113426185.png)
+![image-20200304113426185](./assets/image-20200304113426185.png)
 
 ```mysql
 SELECT a.name,a.score,b.position
@@ -365,5 +365,5 @@ ON a.name = b.name;
 
 ### 进阶操作
 
-<待>
+待..
 

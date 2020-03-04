@@ -8,7 +8,7 @@ module.exports = {
     themeConfig: {
         displayAllHeaders: true,
         nav: [
-            { text: '面试', link: '/' },
+            // { text: '面试', link: '/' },
             // { text: '实战', link: '/abc' },
             // { text: '鸡汤', link: '/abc' },
             { text: 'GitHub', link: 'https://github.com/su37josephxia/frontend-basic' },
@@ -38,26 +38,28 @@ module.exports = {
                     '/存储.md',
                 ]
             },
-            {
-                title: 'DevOps',
-                collapsable: false,
-                children: [
-                    '/Linux命令.md',
-                    '/Nginx配置.md'
-                ]
-            },
-            {
-                title: '算法',
-                collapsable: false,
-                children: [['/算法_去重_排序_递归.md', '一道面试题引发的思考']]
-            },
-            {
-                title: '开源',
-                collapsable: false,
-                children: [
-                    '/从零到一开发一个开源项目.md',
-                ]
-            },
+            ['/database/','SQL基础'],
+            // ['../','ABC']
+            // {
+            //     title: 'DevOps',
+            //     collapsable: false,
+            //     children: [
+            //         '/Linux命令.md',
+            //         '/Nginx配置.md'
+            //     ]
+            // },
+            // {
+            //     title: '算法',
+            //     collapsable: false,
+            //     children: [['/算法_去重_排序_递归.md', '一道面试题引发的思考']]
+            // },
+            // {
+            //     title: '开源',
+            //     collapsable: false,
+            //     children: [
+            //         '/从零到一开发一个开源项目.md',
+            //     ]
+            // },
         ]
     }
 }
