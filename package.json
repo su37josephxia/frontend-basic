@@ -11,7 +11,7 @@
     "start": "npx live-server --open=./src",
     "vuepress": "vuepress dev doc",
     "docs:dev": "vuepress dev doc",
-    "docs:build": "vuepress build doc"
+    "build": "vuepress build doc"
   },
   "repository": {
     "type": "git",

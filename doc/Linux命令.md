@@ -47,9 +47,6 @@ cat id_dsa.pub >> ~/.ssh/authorized_keys
         Your browser does not support the video tag.
 </video> -->
 
-
-<a href="https://scrimba.com/c/cndQdvsp">abc</a>
-
 ### SSH登录
 
 ```bash
