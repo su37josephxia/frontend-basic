@@ -260,7 +260,7 @@ Empty set (0.00 sec)
 #### INSERT
 
 ```bash
-INSERT INTO TBL_RESULT (name,score) VALUES ('tom',20);
+INSERT INTO TBL_RESULT (name,score) VALUES ('李云龙',20);
 ```
 
 #### UPDATE
