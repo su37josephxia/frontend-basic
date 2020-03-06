@@ -9,9 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx live-server --open=./src",
-    "vuepress": "vuepress dev doc",
-    "docs:dev": "vuepress dev doc",
-    "build": "vuepress build doc"
+    "dev": "node build.js && vuepress dev vuepress",
+    "build": "node build.js && vuepress build vuepress"
   },
   "repository": {
     "type": "git",
@@ -26,8 +25,11 @@
   "dependencies": {
     "antd": "file:react/antd",
     "co": "^4.6.0",
+    "fs-extra": "^8.1.0",
     "github-webhook-handler": "^0.7.1",
     "glob": "^7.1.6",
+    "glob-gitignore": "^1.0.14",
+    "globby": "^11.0.0",
     "requirejs": "^2.3.6",
     "thunkify": "^2.1.2"
   }
