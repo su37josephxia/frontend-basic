@@ -6,7 +6,7 @@ module.exports = {
     ga: 'UA-138065799-1',
     description: '',
     themeConfig: {
-        displayAllHeaders: true,
+        displayAllHeaders: false,
         nav: [
             // { text: '面试', link: '/' },
             // { text: '实战', link: '/abc' },
@@ -16,7 +16,7 @@ module.exports = {
         sidebar: [
             {
                 title: 'JS基础 （ECMA 262标准）',
-                // collapsable: true,
+                collapsable: false,
                 children: [
                     '/document/doc/变量类型和计算.md',
                     '/document/doc/原型和原型链.md',
@@ -27,18 +27,27 @@ module.exports = {
                     '/document/doc/this_call_apply_bind_总结.md'
                 ]
             },
-            // {
-            //     title: 'JS Web API (W3C标准)',
-            //     collapsable: true,
-            //     children: [
-            //         '/DOM操作.md',
-            //         '/BOM操作.md',
-            //         '/事件.md',
-            //         '/Ajax_XMLHttpRequest.md',
-            //         '/存储.md',
-            //     ]
-            // },
-            ['/document/doc/database/','SQL基础'],
+            {
+                title: 'JS Web API (W3C标准)',
+                collapsable: false,
+                children: [
+                    '/document/doc/DOM操作.md',
+                    '/document/doc/BOM操作.md',
+                    '/document/doc/事件.md',
+                    '/document/doc/Ajax_XMLHttpRequest.md',
+                    '/document/doc/存储.md',
+                ]
+            },
+            ['/document/database/','SQL基础'],
+            {
+                title: 'Linux基础',
+                collapsable: false,
+                children: [
+                    '/document/server/Linux命令.md',
+                    '/document/server/实战阿里云.md',
+                    '/document/server/实战Mac.md',
+                ]
+            },
             // ['../','ABC']
             // {
             //     title: 'DevOps',
