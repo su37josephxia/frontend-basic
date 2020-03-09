@@ -1,5 +1,5 @@
-Mac服务器安装
-# Brew安装
+# 实战Mac
+## Brew安装
 ## 安装Homebrew
 https://brew.sh/
 ```bash

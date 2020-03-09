@@ -1,4 +1,14 @@
+const plugin = require('vuepress-plugin-baidu-google-analytics')
 module.exports = {
+    plugins: [
+        // '@vuepress/active-header-links',
+        ['vuepress-plugin-baidu-google-analytics', {
+            hm: 'e66bb2ffeef58a94caced7c0bbcd4926',
+            ga: 'UA-138065799-1',
+            ignore_hash: false
+        }]
+    ],
+
     title: '前端大班车',
     // head: [
     //     ['link', { rel: 'icon', href: '/logo.png' }]
@@ -8,12 +18,21 @@ module.exports = {
     themeConfig: {
         displayAllHeaders: false,
         nav: [
-            // { text: '面试', link: '/' },
-            // { text: '实战', link: '/abc' },
-            // { text: '鸡汤', link: '/abc' },
+
+            { text: '掘金', link: 'https://juejin.im/user/593e0a32a0bb9f006b560bad' },
             { text: 'GitHub', link: 'https://github.com/su37josephxia/frontend-basic' },
         ],
         sidebar: [
+            ['/document/database/', 'SQL基础'],
+            {
+                title: 'Linux基础',
+                collapsable: false,
+                children: [
+                    '/document/server/Linux命令.md',
+                    '/document/server/实战阿里云.md',
+                    '/document/server/实战Mac.md',
+                ]
+            },
             {
                 title: 'JS基础 （ECMA 262标准）',
                 collapsable: false,
@@ -38,16 +57,7 @@ module.exports = {
                     '/document/doc/存储.md',
                 ]
             },
-            ['/document/database/','SQL基础'],
-            {
-                title: 'Linux基础',
-                collapsable: false,
-                children: [
-                    '/document/server/Linux命令.md',
-                    '/document/server/实战阿里云.md',
-                    '/document/server/实战Mac.md',
-                ]
-            },
+
             // ['../','ABC']
             // {
             //     title: 'DevOps',
@@ -70,5 +80,18 @@ module.exports = {
             //     ]
             // },
         ]
-    }
+    },
+    // plugins: [
+    //     'vuepress-plugin-baidu-autopush',
+    //     ['baidu-tongji', {
+    //         hm: 'e66bb2ffeef58a94caced7c0bbcd4926'
+    //     }]
+    // ]
+
+    // plugins: ['vuepress-plugin-baidu-tongji', {
+    //     hm: 'e66bb2ffeef58a94caced7c0bbcd4926'
+    // }]
+
+
+
 }
