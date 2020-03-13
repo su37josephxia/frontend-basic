@@ -1,0 +1,1 @@
+scp root@47.98.252.43:~/source/frontend-basic/data-viz/backend/spider/juejin.log .
