@@ -30,7 +30,7 @@ const getDate = () => {
 const schedule = require("node-schedule");
 // 每十分钟
 
-const interval = '0  */1  *  *  *  ?'
+const interval = '0  0  */1  *  *  ?'
 schedule.scheduleJob(interval,() => {
   console.log('run '+ new Date())
   getDate()

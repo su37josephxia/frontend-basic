@@ -1,12 +1,12 @@
 # 然叔的技术分享
 
+<!-- ![avatar](./assets/WechatIMG21.jpeg) -->
+
 - [掘金](https://juejin.im/user/593e0a32a0bb9f006b560bad)
 
 - 关注微信公众号 (获取相关视频)
 
 ![avatar](./assets/image-20200307110836730.png)
-
-
 
 ## 参考资料
 

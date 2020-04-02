@@ -1,0 +1,59 @@
+<script>
+    const start = new Date().getTime()
+    const log = text => {
+        const end = new Date().getTime() - start
+        console.log(`${text} 耗时:${end}`)
+    }
+
+
+
+    function main() {
+        add()
+        setTimer()
+        ajax()
+        setOnload()
+        runPromise()
+    }
+
+    function setOnload() {
+        window.onload = function () {
+            console.log('onload ...')
+        }
+    }
+
+    function add() {
+        log('add')
+        const a = 1 + 2
+        runPromise('add')
+    }
+
+    function setTimer() {
+        setTimeout(
+            function () {
+                log('timmer')
+                runPromise('timmer')
+            },
+            1
+        )
+    }
+
+    function ajax() {
+        var req = new XMLHttpRequest();
+        req.open('GET', '');
+        req.onload = function () {
+            log('ajax onload')
+        };
+        req.onerror = function () {
+            log('ajax error')
+            runPromise('ajax error..')
+        };
+        req.send();
+    }
+
+    function runPromise(text)  {
+        const p = new Promise(resolve => {resolve()})
+        p.then(log(`${text} promise then`))
+    }
+
+    main()
+</script>
