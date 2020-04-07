@@ -88,7 +88,7 @@ http.createServer((req, res) => {
     })
 ```
 
-![image-20200406151235256](assets/image-20200406151235256.png)
+![image-20200406151235256](./assets/image-20200406151235256.png)
 
 ###### expires缓存试验
 
@@ -97,7 +97,7 @@ http.createServer((req, res) => {
 res.setHeader('Expires', new Date(Date.now() + 10 * 1000).toUTCString())
 ```
 
-![image-20200406151527808](assets/image-20200406151527808.png)
+![image-20200406151527808](./assets/image-20200406151527808.png)
 
 
 
@@ -126,7 +126,7 @@ res.setHeader('Expires', new Date(Date.now() + 10 * 1000).toUTCString())
 res.setHeader('Cache-Control', 'max-age=20')
 ```
 
-![image-20200406152042482](assets/image-20200406152042482.png)
+![image-20200406152042482](./assets/image-20200406152042482.png)
 
 我们在10秒后刷新依然在读缓存说明缓存生效而且是以Cache-Control优先的。
 
@@ -140,7 +140,7 @@ res.setHeader('Cache-Control', 'max-age=20')
 
 这是一组通过协商修改时间为基础的策略。
 
-![image-20200406155454994](assets/image-20200406155454994.png)
+![image-20200406155454994](./assets/image-20200406155454994.png)
 
 - 静态资源应答时都会通过last-modified来标示修改时间。
 - 浏览器下次请求相同资源会将last-modified时间作为if-modified-since字段放在请求报文中用以询问服务器是否该资源过期。
@@ -159,11 +159,11 @@ res.setHeader('Cache-Control', 'no-cache')
         }
 ```
 
-![image-20200406160103820](assets/image-20200406160103820.png)
+![image-20200406160103820](./assets/image-20200406160103820.png)
 
-![image-20200406160138435](assets/image-20200406160138435.png)
+![image-20200406160138435](./assets/image-20200406160138435.png)
 
-![image-20200406160214403](assets/image-20200406160214403.png)
+![image-20200406160214403](./assets/image-20200406160214403.png)
 
 
 
@@ -171,7 +171,7 @@ res.setHeader('Cache-Control', 'no-cache')
 
 另一种办法应该是通过内容判断，一般的做法是将返回内容进行摘要（Hash），然后通过对比摘要来判断内容是否更新。
 
-![image-20200406160821104](assets/image-20200406160821104.png)
+![image-20200406160821104](./assets/image-20200406160821104.png)
 
 - 静态资源应答时都会通过etag来标示内容摘要。
 - 浏览器下次请求相同资源会将etag时间作为if-none-match字段放在请求报文中用以询问服务器是否该资源过期。
@@ -194,13 +194,13 @@ if(req.headers['if-none-match'] === hash){
 }
 ```
 
-![image-20200406161242007](assets/image-20200406161242007.png)
+![image-20200406161242007](./assets/image-20200406161242007.png)
 
 
 
-![image-20200406161308796](assets/image-20200406161308796.png)
+![image-20200406161308796](./assets/image-20200406161308796.png)
 
-![image-20200406161354035](assets/image-20200406161354035.png)
+![image-20200406161354035](./assets/image-20200406161354035.png)
 
 
 
@@ -227,7 +227,7 @@ if(req.headers['if-none-match'] === hash){
                 </script>
 ```
 
-![image-20200406165228102](assets/image-20200406165228102.png)
+![image-20200406165228102](./assets/image-20200406165228102.png)
 
 ## ServiceWorker
 
