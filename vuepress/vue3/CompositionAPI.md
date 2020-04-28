@@ -239,7 +239,7 @@ const state = reactive({
 
 ## 生命周期钩子 - Hooks
 
-|Vue3  |Vue3 |
+|Vue2  |Vue3 |
 |----- |----- |
 |beforeCreate|setup(替代)|
 |created|setup(替代)|

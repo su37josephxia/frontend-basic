@@ -1,13 +1,24 @@
 const plugin = require('vuepress-plugin-baidu-google-analytics')
 module.exports = {
     plugins: [
-        // '@vuepress/active-header-links',
+        '@vuepress/nprogress',
+        '@vuepress/back-to-top',
         ['vuepress-plugin-baidu-google-analytics', {
             hm: 'e66bb2ffeef58a94caced7c0bbcd4926',
             ga: 'UA-138065799-1',
             ignore_hash: false
         }]
     ],
+
+
+    // plugins: [
+    //     '@vuepress/active-header-links',
+    //     // ['vuepress-plugin-baidu-google-analytics', {
+    //     //     hm: 'e66bb2ffeef58a94caced7c0bbcd4926',
+    //     //     ga: 'UA-138065799-1',
+    //     //     ignore_hash: true
+    //     // }]
+    // ],
 
     title: '前端大班车',
     // head: [
@@ -106,7 +117,7 @@ module.exports = {
                 //     ]
                 // },
             ],
-            
+
 
         }
 

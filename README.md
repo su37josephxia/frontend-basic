@@ -27,3 +27,7 @@ npm run vuepress // 开发模式
 npm run docs:build // 编译上传
 
 ```
+
+Vuepress采坑教程 https://www.jb51.net/article/156259.htm
+
+一步一步实现 https://blog.csdn.net/w993263495/article/details/88979087

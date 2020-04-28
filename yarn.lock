@@ -1458,11 +1458,17 @@
   dependencies:
     lodash.debounce "^4.0.8"
 
-"@vuepress/plugin-back-to-top@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/@vuepress/plugin-back-to-top/download/@vuepress/plugin-back-to-top-1.3.1.tgz#51fbb043845b46a66e85f66ae099041c76f08abc"
+"@vuepress/plugin-back-to-top@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/@vuepress/plugin-back-to-top/download/@vuepress/plugin-back-to-top-1.4.1.tgz#80b310be5f8ebc13504904e9bafda1c8f0984d52"
   dependencies:
     lodash.debounce "^4.0.8"
+
+"@vuepress/plugin-nprogress@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/@vuepress/plugin-nprogress/download/@vuepress/plugin-nprogress-1.4.1.tgz#2a16217091102a2b4fddc1b09f5854ac4f80f992"
+  dependencies:
+    nprogress "^0.2.0"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -6423,6 +6429,10 @@ npm-run-path@^2.0.0:
   resolved "https://registry.npm.taobao.org/npm-run-path/download/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
   dependencies:
     path-key "^2.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/nprogress/download/nprogress-0.2.0.tgz?cache=0&sync_timestamp=1587262530340&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnprogress%2Fdownload%2Fnprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
 
 nth-check@^1.0.2, nth-check@~1.0.1:
   version "1.0.2"
