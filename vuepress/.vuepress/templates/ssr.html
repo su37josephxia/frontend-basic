@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ title }}</title>
+    <meta name="generator" content="VuePress {{ version }}">
+    {{{ userHeadTags }}}
+    {{{ pageMeta }}}
+    {{{ renderResourceHints() }}}
+    {{{ renderStyles() }}}
+  </head>
+  <body>
+    <!--vue-ssr-outlet-->
+    {{{ renderScripts() }}}
+    <div id="qr">
+      <img  src="/vue3.png"/>
+    </div>
+    
+    <style>
+      #qr {
+        right: 10%;
+        position: fixed;
+        bottom: 10%;
+        z-index: 9999;
+      }
+      #qr img {
+        width: 100px;
+      }
+  
+    </style>
+  </body>
+</html>

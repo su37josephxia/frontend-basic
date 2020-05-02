@@ -1,7 +1,4 @@
-# 官方资源汇总
-## 交流群 
-最新学习资料第一时间Get
-<img :src="$withBase('/vue3.png')" alt="foo">
+# 官方资源
 
 ## 代码地址
 ### Vue3

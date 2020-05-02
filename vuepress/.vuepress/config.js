@@ -9,24 +9,15 @@ module.exports = {
             ignore_hash: false
         }]
     ],
-
-
-    // plugins: [
-    //     '@vuepress/active-header-links',
-    //     // ['vuepress-plugin-baidu-google-analytics', {
-    //     //     hm: 'e66bb2ffeef58a94caced7c0bbcd4926',
-    //     //     ga: 'UA-138065799-1',
-    //     //     ignore_hash: true
-    //     // }]
-    // ],
-
     title: '前端大班车',
     // head: [
     //     ['link', { rel: 'icon', href: '/logo.png' }]
     //   ],
     ga: 'UA-138065799-1',
     description: '',
+    theme: __dirname + '/myTheme',
     themeConfig: {
+        lastUpdated: 'Last Updated',
         displayAllHeaders: false,
         nav: [
             { text: 'Vue3.0', link: 'http://localhost:8081/vue3/' },
@@ -38,6 +29,7 @@ module.exports = {
             '/vue3/': [
                 '',
                 '如何读源码',
+                '实战',
                 'CompositionAPI',
                 '响应式实现对比',
                 '虚拟Dom',
@@ -47,11 +39,10 @@ module.exports = {
                 'TypeScript支持',
                 '自定义渲染器',
                 '性能提升',
-
             ],
             '/': [
                 // '',        /* / */
-                ['/vue3/', 'Vue3资料合集(2012新)'],
+                ['/vue3/', 'Vue3'],
                 ['/document/database/', 'SQL基础'],
                 {
                     title: 'Linux基础',

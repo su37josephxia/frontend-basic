@@ -31,7 +31,8 @@
     "glob-gitignore": "^1.0.14",
     "globby": "^11.0.0",
     "requirejs": "^2.3.6",
-    "thunkify": "^2.1.2"
+    "thunkify": "^2.1.2",
+    "vuepress": "^1.4.1"
   },
   "devDependencies": {
     "@vuepress/plugin-active-header-links": "^1.3.1",

@@ -37,33 +37,34 @@ const evaluate = () => {
 }
 
 const job = async () => {
-    const dir = resolve(__dirname, '../log/home.json')
-    let json
-    try {
-        json = fs.readJSONSync(dir)
-    } catch (e) {
-        json = []
-    }
+    // const dir = resolve(__dirname, '../log/home.json')
+    // let json
+    // try {
+    //     json = fs.readJSONSync(dir)
+    // } catch (e) {
+    //     json = []
+    // }
     const result = await parser(`https://juejin.im/user/593e0a32a0bb9f006b560bad`, evaluate)
     result.createTime = new Date()
     console.log(`========${result.createTime}=========`)
 
     console.log('JOB run：', result)
-    json.push(result)
+    // json.push(result)
 
-    // 写入文件
-    fs.writeJsonSync(dir, json)
+    // // 写入文件
+    // fs.writeJsonSync(dir, json)
 }
 
+job()
 
 // 每10秒触发一次
-schedule.scheduleJob(interval, async () => {
-    try {
-        await job()
-        console.log('=========success=======')
-    } catch (error) {
-        console.log('schedule Error', error)
-    }
-})
+// schedule.scheduleJob(interval, async () => {
+//     try {
+//         await job()
+//         console.log('=========success=======')
+//     } catch (error) {
+//         console.log('schedule Error', error)
+//     }
+// })
 
 
