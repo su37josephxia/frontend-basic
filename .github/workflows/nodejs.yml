@@ -13,15 +13,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 13.2.0
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm run build
+        node-version: 13.2.0
+    - name: npm install and build
+      # 运行的命令或者 action
+      run: |
+        npm install
+        npm run build
