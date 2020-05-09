@@ -14,13 +14,26 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+    # 下载代码
     - uses: actions/checkout@v2
-    - name: Use Node.js 13.2.0
+    # 安装Nodejs
+    - name: Setup Node.js 13.2.0
       uses: actions/setup-node@v1
       with:
         node-version: 13.2.0
-    - name: npm install and build
+    # 安装依赖和编译
+    - name: Npm install and build
       # 运行的命令或者 action
       run: |
         npm install
         npm run build
+    # 部署到阿里云
+    - name: Deploy aliyun
+      uses: easingthemes/ssh-deploy@v2.0.7
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+        ARGS: "-avz --delete"
+        SOURCE: "./doc/.vuepress/dist/"
+        REMOTE_HOST: "47.98.252.43"
+        REMOTE_USER: "root"
+        TARGET: "/root/vuepress"
