@@ -32,7 +32,7 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        ARGS: "-avzr --delete"
+        ARGS: "-avz --delete"
         SOURCE: "./doc/xmind"
         REMOTE_HOST: "47.98.252.43"
         REMOTE_USER: "root"
