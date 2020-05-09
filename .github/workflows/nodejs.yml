@@ -31,7 +31,7 @@ jobs:
     - name: Deploy to Aliyun
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVAT_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         ARGS: "-avzr --delete"
         SOURCE: "./doc/.vuepress/dist/"
         REMOTE_HOST: "47.98.252.43"
