@@ -28,11 +28,11 @@ jobs:
         npm install
         npm run build
     # 部署到阿里云
-    - name: Deploy aliyun
-      uses: easingthemes/ssh-deploy@v2.0.7
+    - name: Deploy to Aliyun
+      uses: easingthemes/ssh-deploy@v2.1.1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVAT_KEY }}
-        ARGS: "-avz --delete"
+        ARGS: "-avzr --delete"
         SOURCE: "./doc/.vuepress/dist/"
         REMOTE_HOST: "47.98.252.43"
         REMOTE_USER: "root"
