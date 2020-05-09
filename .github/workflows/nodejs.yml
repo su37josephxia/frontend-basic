@@ -33,7 +33,7 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         ARGS: "-avz --delete"
-        SOURCE: "doc/xmind"
+        SOURCE: "doc/.vuepress"
         REMOTE_HOST: "47.98.252.43"
         REMOTE_USER: "root"
         TARGET: "/root/vuepress"
