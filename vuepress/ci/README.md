@@ -10,7 +10,7 @@
 
 ## 什么是持续集成CI
 
-![image-20200509162051364](assets/image-20200509162051364.png)
+![image-20200509162051364](./assets/image-20200509162051364.png)
 
 ### 概念
 
@@ -31,7 +31,7 @@
 
 ### DevOps
 
-![image-20200509162720480](assets/image-20200509162720480.png)
+![image-20200509162720480](./assets/image-20200509162720480.png)
 
 DevOps 一词本身是对于 development 以及 operation 两个词的混合，其目的在于缩短系统开发的生命周期，在这过程中发布特性、修复bug以及更新均被紧密的结合。
 听起来似乎有点玄乎，可以这样理解：DevOps 也即是促使开发人员与运维人员之间相互协作的文化。
@@ -132,7 +132,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    # 下载代码
+    # 拉取代码
     - uses: actions/checkout@v2
     # 安装Nodejs
     - name: Setup Node.js 13.2.0
@@ -157,14 +157,29 @@ jobs:
         TARGET: "/root/vuepress"
 ```
 
-
-
-
-
-设置配置项
-
-ssh公钥
+#### 建立SSH信任
 
 https://github.com/marketplace/actions/ssh-deploy#configuration
+
+##### 生成一个秘钥对
+
+```bash
+ssh-keygen -m PEM -t rsa -b 4096
+```
+
+也可以使用开发机上的秘钥对代替
+
+##### 项目中添加私钥
+
+将私钥添加到 [项目]>[Secrets]>
+
+![image-20200509172257399](./assets/image-20200509172257399.png)
+
+##### 将公钥添加到部署服务器
+
+![image-20200509172803119](./assets/image-20200509172803119.png)
+
+将公钥添加到.ssh/authorized_keys文件中
+
 
 
