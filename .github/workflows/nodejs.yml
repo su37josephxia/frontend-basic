@@ -17,16 +17,16 @@ jobs:
     # 下载代码
     - uses: actions/checkout@v2
     # 安装Nodejs
-    # - name: Setup Node.js 13.2.0
-    #   uses: actions/setup-node@v1
-    #   with:
-    #     node-version: 13.2.0
-    # # 安装依赖和编译
-    # - name: Npm install and build
-    #   # 运行的命令或者 action
-    #   run: |
-    #     npm install
-    #     npm run build
+    - name: Setup Node.js 13.2.0
+      uses: actions/setup-node@v1
+      with:
+        node-version: 13.2.0
+    # 安装依赖和编译
+    - name: Npm install and build
+      # 运行的命令或者 action
+      run: |
+        npm install
+        npm run build
     # 部署到阿里云
     - name: Deploy to Aliyun
       uses: easingthemes/ssh-deploy@v2.1.1
