@@ -1,0 +1,14 @@
+# Query 入口
+
+type Query {
+    hello: String,
+    user(id: String): User
+    users: [User]!
+}
+
+type User {
+    id: ID!
+    name: String!
+    age: Int
+    email: String!
+}

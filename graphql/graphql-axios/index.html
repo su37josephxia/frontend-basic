@@ -1,0 +1,25 @@
+<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+<script>
+  const query = `query($color:String) {
+      getBox {
+        width
+        balls (color:$color){
+          size
+          color
+        }
+      }
+    }`;
+    const variables = {
+      color: "red"
+    };
+
+  axios
+    .post("http://localhost:4000/graphql", {
+      query,
+      variables
+    })
+    .then(res => {
+      console.log("res: ", res);
+      document.writeln(JSON.stringify(res.data))
+    });
+</script>
