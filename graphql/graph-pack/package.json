@@ -1,0 +1,29 @@
+{
+  "name": "graphql-demo",
+  "version": "1.0.0",
+  "description": "这个例子演示了如何使用 GraphQL 来操作 MongoDB\n",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.13"
+  },
+  "devDependencies": {
+    "graphpack": "^1.0.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "graphpack",
+    "build": "graphpack build"
+  },
+  "keywords": [
+    "express",
+    "graphql"
+  ],
+  "author": "SHERlocked93",
+  "license": "ISC"
+}

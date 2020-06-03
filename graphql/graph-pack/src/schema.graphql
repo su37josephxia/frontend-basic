@@ -1,0 +1,40 @@
+# Query 入口
+type Query {
+    hello: String
+    users: [User]!
+    user(id: String): User
+}
+
+# Mutation 入口
+type Mutation {
+    createUser(id: ID!, name: String!, email: String!, age: Int, gender: Gender): User!
+    updateUser(id: ID!, name: String, email: String, age: Int, gender: Gender): User!
+    deleteUser(id: ID!): User
+}
+
+# Subscription 入口
+type Subscription {
+    subsUser(id: ID!): User
+}
+
+type User implements UserInterface {
+    id: ID!
+    name: String!
+    age: Int
+    gender: Gender
+    email: String!
+}
+
+# 枚举类型
+enum Gender {
+    MAN
+    WOMAN
+}
+
+# 接口类型
+interface UserInterface {
+    id: ID!
+    name: String!
+    age: Int
+    gender: Gender
+}
