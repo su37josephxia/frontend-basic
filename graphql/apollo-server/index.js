@@ -1,42 +1,92 @@
-const { ApolloServer, gql } = require('apollo-server');
-
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
+const { ApolloServer, gql , PubSub, withFilter} = require('apollo-server');
+const pubsub = new PubSub()
 const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+  type Query {
+    hello: String,
+    books: [Book],
+    book(id : String) : Book
+  }
 
-  # This "Book" type defines the queryable fields for every book in our data source.
   type Book {
     title: String
     author: String
   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
+
+  type Mutation {
+    createBook(id: ID!, title: String!, author: String!): Book!
   }
+
+  type Subscription {
+    subsBook(id: ID!): Book
+  }
+
 `;
 
 
-const books = [
-    {
-        title: 'Harry Potter and the Chamber of Secrets',
-        author: 'J.K. Rowling',
-    },
-    {
-        title: 'Jurassic Park',
-        author: 'Michael Crichton',
-    },
-];
-
 const resolvers = {
     Query: {
-        books: () => books,
+        hello: () => 'Hello world!',
+        books: (parent, args) => {
+            return [
+                {
+                    title: 'abc',
+                    author: 'xxxx'
+                }
+            ]
+        },
+        book: (parent, { id }) => {
+
+            console.log('parent', parent)
+            console.log('query books:', id)
+            return {
+                title: 'abc',
+                author: 'xxxx'
+            }
+
+        }
     },
+
+    Mutation: {
+        
+        createBook: (parent, args) => {
+            console.log('createBook ....',args)
+
+            return {
+                title: 'abc',
+                author: 'xxxx'
+            }
+        } 
+    },
+
+    Subscription: {
+        subsBook: {
+            // 过滤不需要订阅的消息
+            subscribe: withFilter(
+                (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'), 
+                // (payload, variables) => payload.subsBook.id === variables.id
+                (payload, variables) => {
+                    console.log(payload,variables)
+                    return true 
+                }
+            ),
+            resolve: (payload, variables) => {
+                console.log('🚢 接收到数据： ', payload)
+                return payload.subsBook
+            }
+        }
+    }
+
 };
+
+setInterval( () => {
+    console.log('update....')
+    pubsub.publish('UPDATE_BOOK', { subsBook: {
+        id: 1,
+        title:'abc',
+        author: 'yyy'
+    } })
+},1000)
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
