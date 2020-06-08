@@ -15,7 +15,10 @@ function Subscription() {
         GQL,
     //   { variables: { repoFullName } }
     );
-    console.log('data:',data)
+    setInterval(() => {
+        console.log('data:',data)
+
+    },1000)
 
     
     return <h4>SubBook title: {!loading && JSON.stringify(data)}</h4>;

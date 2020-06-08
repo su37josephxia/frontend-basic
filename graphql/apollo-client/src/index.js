@@ -8,13 +8,16 @@ import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 
+import { split } from 'apollo-link';
+import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
 
-
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  // uri: 'https://48p1r2roz4.sse.codesandbox.io'
-});
+// 单纯Query Mutation
+// const client = new ApolloClient({
+//   uri: 'http://localhost:4000/graphql',
+//   // uri: 'https://48p1r2roz4.sse.codesandbox.io'
+// });
 
 
 // client
@@ -38,13 +41,7 @@ const wsLink = new WebSocketLink({
 });
 
 
-
-// import { split } from 'apollo-link';
-// import { HttpLink } from 'apollo-link-http';
-// import { WebSocketLink } from 'apollo-link-ws';
-// import { getMainDefinition } from 'apollo-utilities';
-
-// // Create an http link:
+// Create an http link:
 // const httpLink = new HttpLink({
 //   uri: 'http://localhost:4000/graphql'
 // });
@@ -73,10 +70,14 @@ const wsLink = new WebSocketLink({
 // );
 
 
+const client = new ApolloClient({
+  networkInterface: link
+});
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client} wsLink={wsLink}>
+    <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
   </React.StrictMode >,
