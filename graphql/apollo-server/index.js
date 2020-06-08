@@ -83,7 +83,7 @@ setInterval( () => {
     console.log('update....')
     pubsub.publish('UPDATE_BOOK', { subsBook: {
         id: 1,
-        title:'abc',
+        title:'abc' + Date.now(),
         author: 'yyy'
     } })
 },1000)

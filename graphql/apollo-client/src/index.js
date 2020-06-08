@@ -4,21 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import ApolloClient, { gql } from 'apollo-boost';
+// import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-
+import { ApolloClient } from 'apollo-client'
 
 import { split } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-
-// 单纯Query Mutation
-// const client = new ApolloClient({
-//   uri: 'http://localhost:4000/graphql',
-//   // uri: 'https://48p1r2roz4.sse.codesandbox.io'
-// });
-
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // client
 //   .query({
@@ -33,6 +27,17 @@ import { getMainDefinition } from 'apollo-utilities';
 //   })
 //   .then(result => console.log('graphql:', result));
 
+
+
+
+
+// Subscription
+// Create an http link:
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000/graphql'
+});
+
+// Create a WebSocket link:
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/graphql`,
   options: {
@@ -40,38 +45,33 @@ const wsLink = new WebSocketLink({
   }
 });
 
+// using the ability to split links, you can send data to each link
+// depending on what kind of operation is being sent
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
 
-// Create an http link:
-// const httpLink = new HttpLink({
-//   uri: 'http://localhost:4000/graphql'
+
+// 单纯Query Mutation
+
+// const client = new ApolloClient({
+//   uri: 'http://localhost:4000/graphql',
 // });
 
-// // Create a WebSocket link:
-// const wsLink = new WebSocketLink({
-//   uri: `ws://localhost:4000/graphql`,
-//   options: {
-//     reconnect: true
-//   }
-// });
-
-// // using the ability to split links, you can send data to each link
-// // depending on what kind of operation is being sent
-// const link = split(
-//   // split based on operation type
-//   ({ query }) => {
-//     const definition = getMainDefinition(query);
-//     return (
-//       definition.kind === 'OperationDefinition' &&
-//       definition.operation === 'subscription'
-//     );
-//   },
-//   wsLink,
-//   httpLink,
-// );
-
-
+// Subscription
+const cache = new InMemoryCache();
 const client = new ApolloClient({
-  networkInterface: link
+  link,
+  cache
 });
 
 

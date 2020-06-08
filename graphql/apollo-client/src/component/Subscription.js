@@ -11,17 +11,11 @@ const GQL = gql`
 `;
 
 function Subscription() {
-    const { data: data, loading } = useSubscription(
+    const { data, loading } = useSubscription(
         GQL,
     //   { variables: { repoFullName } }
-    );
-    setInterval(() => {
-        console.log('data:',data)
-
-    },1000)
-
-    
-    return <h4>SubBook title: {!loading && JSON.stringify(data)}</h4>;
+    )
+    return <h4>SubBook title: {!loading && data.subsBook.title}</h4>;
   }
 
 export default Subscription;
