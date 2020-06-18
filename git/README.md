@@ -2,6 +2,8 @@
 ## 参考资料
 [廖雪峰Git教程](https://www.liaoxuefeng.com/wiki/896043488029600)
 
+[前端常见异常](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
+
 ## Git使用
 ### 本地版本
 
@@ -10,6 +12,8 @@
 git log
 git log –-oneline # 简短日志
 ```
+
+### restore 丢弃工作去变动
 
 ### 回退reset和revert
 reset与revert区别
@@ -45,6 +49,11 @@ git reset --hard ’commit_id‘
 ### 分支管理
 
 ### 远程仓库
+
+#### 提交本地分支到远程
+```bash
+git push --set-upstream origin abc
+```
 #### 远程版本回退
 ```bash
 git push origin HEAD --force
