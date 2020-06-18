@@ -1,4 +1,21 @@
-# Rest2.0标准来了,它叫 GraphQL
+# Rest的替代品来了,它叫 GraphQL
+
+![image-20200618153513760](assets/image-20200618153513760.png)
+
+你知道吗？FaceBook、GitHub，Pinterest，Twitter，Sky，纽约时报，Shopify，Yelp这些大公司已经在使用GraphQL规范的接口规范了。再不学习就落后了。
+
+## 你将Get到的技能
+
+- GraphQL概念
+- 实战GraphQL - Query/Mutation/Subscription
+- Rest vs GraphQL 对比分析
+- 如何搭建GraphQL后端服务
+- 如何利用React hooks 、Provider封装GraphQL客户端
+- 如何通过GraphQL完成对数据变化的订阅
+
+
+
+## GraphQL优势
 
 ## 前端的四个时代和接口风格的变迁
 
@@ -139,7 +156,7 @@ mutation {
 }
 ```
 
-### 查询参数
+##### 查询参数
 
 
 
@@ -186,4 +203,10 @@ subscription {
 ### 概念
 
 Apollo 是基于 GraphQL 的全栈解决方案集合。包括了 apollo-client 和 apollo-server ；从后端到前端提供了对应的 lib 使得开发使用 GraphQL 更加的方便。
+
+
+
+
+
+
 
