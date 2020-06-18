@@ -1,6 +1,6 @@
 # Rest的替代品来了,它叫 GraphQL
 
-![image-20200618153513760](assets/image-20200618153513760.png)
+![image-20200618153513760](./assets/image-20200618153513760.png)
 
 你知道吗？FaceBook、GitHub，Pinterest，Twitter，Sky，纽约时报，Shopify，Yelp这些大公司已经在使用GraphQL规范的接口规范了。再不学习就落后了。
 
@@ -25,13 +25,13 @@
 
 - 后端渲染时代
 
-  ![image-20200618112722744](assets/image-20200618112722744.png)
+  ![image-20200618112722744](./assets/image-20200618112722744.png)
 
 - 前后端分离时代
 
-  ![image-20200618113108725](assets/image-20200618113108725.png)
+  ![image-20200618113108725](./assets/image-20200618113108725.png)
 
-![image-20200618113050301](assets/image-20200618113050301.png)
+![image-20200618113050301](./assets/image-20200618113050301.png)
 
 ## GraphQL
 
