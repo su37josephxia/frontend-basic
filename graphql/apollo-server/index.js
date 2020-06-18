@@ -13,7 +13,6 @@ const typeDefs = gql`
     author: String
   }
 
-
   type Mutation {
     createBook(title: String!, author: String!): Book!
   }
@@ -32,8 +31,6 @@ const books = (
         author: 'Author' + i
     }))
 )()
-
-
 
 const resolvers = {
     Query: {
@@ -61,14 +58,10 @@ const resolvers = {
             // 过滤不需要订阅的消息
             subscribe: withFilter(
                 (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'),
-                // (payload, variables) => payload.subsBook.id === variables.id
-                (payload, variables) => {
-                    console.log(payload, variables)
-                    return true
-                }
+                (payload, variables) => payload.subsBook.id === variables.id
             ),
             resolve: (payload, variables) => {
-                console.log('🚢 接收到数据： ', payload)
+                console.log('接收到数据： ', payload)
                 return payload.subsBook
             }
         },
@@ -77,11 +70,10 @@ const resolvers = {
             // 过滤不需要订阅的消息
             subscribe: withFilter(
                 (parent, variables) => pubsub.asyncIterator('UPDATE_BOOK'),
-                // (payload, variables) => payload.subsBook.id === variables.id
                 (payload, variables) => {
-                    console.log(payload, variables)
                     return true
                 }
+                
             ),
             resolve: (payload, variables) => {
                 return books
