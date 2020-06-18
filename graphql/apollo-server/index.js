@@ -1,4 +1,4 @@
-const { ApolloServer, gql , PubSub, withFilter} = require('apollo-server');
+const { ApolloServer, gql, PubSub, withFilter } = require('apollo-server');
 const pubsub = new PubSub()
 const typeDefs = gql`
   type Query {
@@ -8,85 +8,99 @@ const typeDefs = gql`
   }
 
   type Book {
+    id:String
     title: String
     author: String
   }
 
 
   type Mutation {
-    createBook(id: ID!, title: String!, author: String!): Book!
+    createBook(title: String!, author: String!): Book!
   }
 
   type Subscription {
-    subsBook(id: ID!): Book
+    subsBook(id: ID): Book,
+    subsBooks: [Book],
   }
 
 `;
+
+const books = (
+    () => Array(5).fill().map((v, i) => ({
+        id: '' + i,
+        title: 'Title' + i,
+        author: 'Author' + i
+    }))
+)()
+
 
 
 const resolvers = {
     Query: {
         hello: () => 'Hello world!',
-        books: (parent, args) => {
-            return [
-                {
-                    title: 'abc',
-                    author: 'xxxx'
-                }
-            ]
-        },
+        books: () => books,
         book: (parent, { id }) => {
-
-            console.log('parent', parent)
-            console.log('query books:', id)
-            return {
-                title: 'abc',
-                author: 'xxxx'
-            }
-
+            return books.find(v => v.id === id)
         }
     },
 
     Mutation: {
-        
         createBook: (parent, args) => {
-            console.log('createBook ....',args)
-
-            return {
-                title: 'abc',
-                author: 'xxxx'
-            }
-        } 
+            const book = {...args,id: books.length + 1 + ''}
+            books.push(book)
+            // 发布订阅消息
+            pubsub.publish('UPDATE_BOOK', {
+                subsBook: book
+            })
+            return book
+        }
     },
 
     Subscription: {
         subsBook: {
             // 过滤不需要订阅的消息
             subscribe: withFilter(
-                (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'), 
+                (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'),
                 // (payload, variables) => payload.subsBook.id === variables.id
                 (payload, variables) => {
-                    console.log(payload,variables)
-                    return true 
+                    console.log(payload, variables)
+                    return true
                 }
             ),
             resolve: (payload, variables) => {
                 console.log('🚢 接收到数据： ', payload)
                 return payload.subsBook
             }
+        },
+
+        subsBooks: {
+            // 过滤不需要订阅的消息
+            subscribe: withFilter(
+                (parent, variables) => pubsub.asyncIterator('UPDATE_BOOK'),
+                // (payload, variables) => payload.subsBook.id === variables.id
+                (payload, variables) => {
+                    console.log(payload, variables)
+                    return true
+                }
+            ),
+            resolve: (payload, variables) => {
+                return books
+            }
         }
     }
 
 };
 
-setInterval( () => {
-    console.log('update....')
-    pubsub.publish('UPDATE_BOOK', { subsBook: {
-        id: 1,
-        title:'abc' + Date.now(),
-        author: 'yyy'
-    } })
-},1000)
+// setInterval(() => {
+//     // console.log('update....')
+//     pubsub.publish('UPDATE_BOOK', {
+//         subsBook: {
+//             id: 1,
+//             title: 'abc' + Date.now(),
+//             author: 'yyy'
+//         }
+//     })
+// }, 1000)
 
 const server = new ApolloServer({ typeDefs, resolvers });
 

@@ -12,6 +12,7 @@ const typeDefs = gql`
   }
 
   type Book {
+    id:String
     title: String
     author: String
   }
@@ -52,22 +53,20 @@ const resolvers = {
     },
 
     Mutation: {
-        
-        createBook: (parent, args) => {
-            console.log('createBook ....',args)
 
+        createBook: (parent, args) => {
+            console.log('createBook ....', args)
             return {
-                title: 'abc',
-                author: 'xxxx'
+                id: '6666',
             }
-        } 
+        }
     },
 
     Subscription: {
         subsBook: {
             // 过滤不需要订阅的消息
             subscribe: withFilter(
-                (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'), 
+                (parent, { id }) => pubsub.asyncIterator('UPDATE_BOOK'),
                 (payload, variables) => payload.subsBook.id === variables.id
             ),
             resolve: (payload, variables) => {
@@ -79,12 +78,14 @@ const resolvers = {
 
 };
 
-setInterval( () => {
-    pubsub.publish('UPDATE_BOOK', { subsUser: {
-        title:'abc',
-        author: 'yyy'
-    } })
-},1000)
+setInterval(() => {
+    pubsub.publish('UPDATE_BOOK', {
+        subsUser: {
+            title: 'abc',
+            author: 'yyy'
+        }
+    })
+}, 1000)
 
 
 const server = new ApolloServer({ typeDefs, resolvers });
