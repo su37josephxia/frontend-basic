@@ -6,8 +6,8 @@ import Subscription from './component/Subscription'
 function App() {
   return (
     <div >
-      <Query></Query>
       <Mutation></Mutation>
+      {/* <Query></Query> */}
       <Subscription></Subscription>
     </div>
   );

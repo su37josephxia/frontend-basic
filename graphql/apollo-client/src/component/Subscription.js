@@ -1,21 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSubscription } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import Query from './Query'
 
-const GQL = gql`
+const subs = gql`
     subscription {
-        subsBook(id:123){
-            title
-        }
+        subsBooks
     }
 `;
 
 function Subscription() {
-    const { data, loading } = useSubscription(
-        GQL,
-    //   { variables: { repoFullName } }
-    )
-    return <h4>SubBook title: {!loading && data.subsBook.title}</h4>;
-  }
+    useSubscription(subs)
+    return <Query/>
+}
 
 export default Subscription;

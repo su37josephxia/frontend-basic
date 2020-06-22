@@ -3,41 +3,59 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 const CREATE_BOOK = gql`
-    mutation CreateBook($id:ID!,$title:String!,$author:String!){
-        createBook(id:$id,title:$title,author:$author){
+    mutation CreateBook($title:String!,$author:String!){
+        createBook(title:$title,author:$author){
+            id,
             title,
             author
         }
     }
 `;
 
+const CLEAR_BOOK = gql`
+    mutation {
+        clearBook
+    }
+`;
+
 function Mutation() {
-    let input;
-    const [createBook, { data }] = useMutation(CREATE_BOOK);
+    let title;
+    let author;
+
+    const [create, { data }] = useMutation(CREATE_BOOK);
+
+    const [clear] = useMutation(CLEAR_BOOK)
 
     return (
         <div>
             <form
                 onSubmit={e => {
                     e.preventDefault();
-                    createBook({
+                    create({
                         variables: {
-                            "id": "2",
-                            "title": "王五",
-                            "author": "xxxx@qq.com"
+                            "title": title.value,
+                            "author": author.value
                         }
                     });
                     console.log('mutation:',data)
-                    input.value = '';
+                    title.value = '';
                 }}
             >
                 <input
+                    value = "TTT"
                     ref={node => {
-                        input = node;
+                        title = node;
                     }}
                 />
-                <button type="submit">Create Book</button>
+                <input
+                    value = "AAAA"
+                    ref={node => {
+                        author = node;
+                    }}
+                />
+                <button type="submit">Create</button>
             </form>
+            <button onClick={ clear }>Clear</button>
         </div>
     );
 }
