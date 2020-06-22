@@ -14,23 +14,6 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-// client
-//   .query({
-//     query: gql`
-//       query {
-//         book{
-//           title,
-//           author
-//         }
-//       }
-//     `
-//   })
-//   .then(result => console.log('graphql:', result));
-
-
-
-
-
 // Subscription
 // Create an http link:
 const httpLink = new HttpLink({
@@ -62,7 +45,6 @@ const link = split(
 
 
 // 单纯Query Mutation
-
 // const client = new ApolloClient({
 //   uri: 'http://localhost:4000/graphql',
 // });

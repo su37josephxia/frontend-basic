@@ -34,53 +34,46 @@ const books = (
         author: 'Author' + i
     }))
 )()
-
-const resolvers = {
-    Query: {
-        hello: () => 'Hello world!',
-        books: () => books,
-        book: (parent, { id }) => {
-            return books.find(v => v.id === id)
-        }
-    },
-
-    Mutation: {
-        createBook: (parent, args) => {
-            const book = {...args,id: books.length + 1 + ''}
-            books.push(book)
-            // 发布订阅消息
-            pubsub.publish('UPDATE_BOOK', {
-                subsBooks: true
-            })
-            return book
-        },
-        clearBook: () => {
-            books.length = 0
-            pubsub.publish('UPDATE_BOOK', {
-                subsBooks: true
-            })
-            return true
-        }
-    },
-
-    Subscription: {
-        subsBooks: {
-            // 过滤不需要订阅的消息
-            subscribe: withFilter(
-                (parent, variables) => pubsub.asyncIterator('UPDATE_BOOK'),
-                (payload, variables) => true
-            )
-        },
+const resolvers = {}
+resolvers.Query = {
+    hello: () => 'Hello world!',
+    books: () => books,
+    book: (parent, { id }) => {
+        return books.find(v => v.id === id)
     }
+}
 
-};
 
-// setInterval(() => {
-//     // console.log('update....')
-//     pubsub.publish('UPDATE_BOOK', {
-//         subsBooks: books
-//     })
-// }, 1000)
+resolvers.Mutation = {
+    createBook: (parent, args) => {
+        const book = { ...args, id: books.length + 1 + '' }
+        books.push(book)
+        // 发布订阅消息
+        pubsub.publish('UPDATE_BOOK', {
+            subsBooks: true
+        })
+        return book
+    },
+    clearBook: () => {
+        books.length = 0
+        pubsub.publish('UPDATE_BOOK', {
+            subsBooks: true
+        })
+        return true
+    }
+}
+
+resolvers.Subscription = {
+    subsBooks: {
+        // 过滤不需要订阅的消息
+        subscribe: withFilter(
+            (parent, variables) => pubsub.asyncIterator('UPDATE_BOOK'),
+            (payload, variables) => true
+        )
+    },
+}
+
+
 
 const server = new ApolloServer({ typeDefs, resolvers });
 

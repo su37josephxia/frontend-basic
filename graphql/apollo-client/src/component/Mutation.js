@@ -19,9 +19,6 @@ const CLEAR_BOOK = gql`
 `;
 
 function Mutation() {
-    let title;
-    let author;
-
     const [create, { data }] = useMutation(CREATE_BOOK);
 
     const [clear] = useMutation(CLEAR_BOOK)
@@ -33,26 +30,14 @@ function Mutation() {
                     e.preventDefault();
                     create({
                         variables: {
-                            "title": title.value,
-                            "author": author.value
+                            "title": 'Title' + (Math.random() * 100).toFixed(),
+                            "author": 'Author'+ (Math.random() * 100).toFixed()
                         }
                     });
                     console.log('mutation:',data)
-                    title.value = '';
                 }}
             >
-                <input
-                    value = "TTT"
-                    ref={node => {
-                        title = node;
-                    }}
-                />
-                <input
-                    value = "AAAA"
-                    ref={node => {
-                        author = node;
-                    }}
-                />
+                
                 <button type="submit">Create</button>
             </form>
             <button onClick={ clear }>Clear</button>

@@ -5,6 +5,7 @@ import { gql } from 'apollo-boost';
 const QUERY = gql`
     query {
         books {
+            id,
             author,
             title
         }
@@ -23,7 +24,7 @@ function Query() {
     if (error) return <p>Error :(</p>
     console.log('book', data)
     const list = data.books.map(v => (
-        <div>{v.author}: {v.title}</div>
+    <div>{v.author}: {v.title}</div>
     ))
 
     return list

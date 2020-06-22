@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSubscription } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import Query from './Query'
