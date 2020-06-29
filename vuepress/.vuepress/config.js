@@ -44,6 +44,7 @@ module.exports = {
                 // '',        /* / */
                 ['/vue3/', 'Vue3'],
                 ['/ci/', '持续集成'],
+                ['/git/', 'Git'],
                 ['/document/database/', 'SQL基础'],
                 {
                     title: 'Linux基础',
