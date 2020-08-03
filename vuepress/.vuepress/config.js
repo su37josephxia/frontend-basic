@@ -46,6 +46,7 @@ module.exports = {
                 ['/ci/', '持续集成'],
                 ['/git/', 'Git'],
                 ['/document/database/', 'SQL基础'],
+                ['/document/node/', 'Node基础'],
                 {
                     title: 'Linux基础',
                     collapsable: false,
