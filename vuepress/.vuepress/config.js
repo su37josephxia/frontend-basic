@@ -88,7 +88,7 @@ module.exports = {
                         // '/document/doc/存储.md',
                     ]
                 },
-
+                ['/document/booklist/', '书单'],
                 // ['../','ABC']
                 // {
                 //     title: 'DevOps',
