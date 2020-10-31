@@ -1,0 +1,19 @@
+{
+  "name": "publish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "co-redis": "^2.1.1",
+    "koa": "^2.13.0",
+    "koa-router": "^9.4.0",
+    "redis": "^3.0.2",
+    "socket.io": "^2.3.0"
+  }
+}
