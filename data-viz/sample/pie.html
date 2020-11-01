@@ -13,48 +13,6 @@
     <!-- 创建图表容器 -->
     <div id="c1"></div>
     <script>
-      // const data = [
-      //   { k: "一", v: 40 },
-      //   { k: "二", v: 21 },
-      //   { k: "三", v: 17 },
-      //   { k: "四", v: 13 },
-      //   { k: "五", v: 9 },
-      // ];
-      // const dv = new DataSet.View()
-      //   .source(data) // 载入数据
-      //   .transform({
-      //     // 数据处理：统计每一个 key 对应数值 value 占总和的比例
-      //     type: "percent",
-      //     field: "v",
-      //     dimension: "k",
-      //     as: "percent",
-      //   });
-      // const chart = new G2.Chart({
-      //   container: "c1", // 指定图表容器，可以是 DomNode，也可以是 id
-      // });
-      // chart.data(dv); // 载入数据
-      // chart.axis(false); // 不显示坐标轴
-      // // chart.coordinate("polar") // 设定极坐标
-      // chart.coordinate("theta", {
-      //   radius: 0.75,
-      // });
-      // chart
-      //   .interval()
-      //   .adjust("stack")
-      //   .position("percent") // 位置映射
-      //   .color("k") // 颜色映射
-      //   .adjust("stack");
-
-      // chart.render(); // 渲染图表
-
-      // const data = [
-      //   { item: "事例一", count: 40, percent: 0.4 },
-      //   { item: "事例二", count: 21, percent: 0.21 },
-      //   { item: "事例三", count: 17, percent: 0.17 },
-      //   { item: "事例四", count: 13, percent: 0.13 },
-      //   { item: "事例五", count: 9, percent: 0.09 },
-      // ];
-
       const data = [
         { city: "北京", number: 40 },
         { city: "上海", number: 21 },
@@ -71,19 +29,15 @@
           dimension: "city",
           as: "percent",
         });
-
+      console.log('transform',dv)
       const chart = new G2.Chart({
         container: "c1",
         autoFit: true,
         height: 500,
       });
 
-      // chart  // 坐标系设定
-      // .coordinate("theta", {
-      //   radius: 0.75,
-      // });
-      // chart.coordinate("polar") // 极坐标
-      chart.coordinate("polar").transpose(); // 反转极坐标
+      chart
+        .coordinate("polar").transpose(); // 反转极坐标
 
       chart.data(dv.rows);
 
@@ -100,10 +54,9 @@
         .color("city") // 颜色映射
         .label("percent", {
           content: (data) => {
-            return `${data.city}: ${data.percent * 100}%`;
+            return `${data.city}: ${data.percent * 100}毫米`;
           },
-        }) // 文字标注
-        // .adjust("stack");
+        }) 
 
       chart.render();
     </script>
