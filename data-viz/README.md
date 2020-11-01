@@ -66,3 +66,71 @@
 
 ## 四、G2实战
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g2/4.0.11/dist/g2.min.js"></script>
+    <script src="https://unpkg.com/@antv/data-set"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+  </head>
+
+  <body>
+    <!-- 创建图表容器 -->
+    <div id="c1"></div>
+    <script>
+      const data = [
+        { city: "北京", number: 40 },
+        { city: "上海", number: 21 },
+        { city: "广州", number: 17 },
+        { city: "青岛", number: 13 },
+        { city: "武汉", number: 9 },
+      ];
+      const dv = new DataSet.View()
+        .source(data) // 载入数据
+        .transform({
+          // 数据处理：统计每一个 key 对应数值 value 占总和的比例
+          type: "percent",
+          field: "number",
+          dimension: "city",
+          as: "percent",
+        });
+      console.log('transform',dv)
+      const chart = new G2.Chart({
+        container: "c1",
+        autoFit: true,
+        height: 500,
+      });
+
+      chart
+        .coordinate("polar").transpose(); // 反转极坐标
+
+      chart.data(dv.rows);
+
+      chart.scale("percent", {
+        formatter: (val) => {
+          val = val * 100 + "%";
+          return val;
+        },
+      }); // 度量变换
+
+      chart
+        .interval()
+        .position("percent") // 位置映射
+        .color("city") // 颜色映射
+        .label("percent", {
+          content: (data) => {
+            return `${data.city}: ${data.percent * 100}毫米`;
+          },
+        }) 
+
+      chart.render();
+    </script>
+  </body>
+</html>
+
+```
+
