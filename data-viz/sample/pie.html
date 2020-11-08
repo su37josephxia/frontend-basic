@@ -20,44 +20,37 @@
         { city: "青岛", number: 13 },
         { city: "武汉", number: 9 },
       ];
-      const dv = new DataSet.View()
-        .source(data) // 载入数据
-        .transform({
-          // 数据处理：统计每一个 key 对应数值 value 占总和的比例
-          type: "percent",
-          field: "number",
-          dimension: "city",
-          as: "percent",
-        });
-      console.log('transform',dv)
+      const dv = new DataSet.View().source(data).transform({
+        type: "percent",
+        field: "number",
+        dimension: "city",
+        as: "percent",
+      });
+      console.log("data", dv);
+
       const chart = new G2.Chart({
         container: "c1",
         autoFit: true,
         height: 500,
       });
 
-      chart
-        .coordinate("polar").transpose(); // 反转极坐标
-
+      chart.coordinate("polar").transpose();
       chart.data(dv.rows);
-
       chart.scale("percent", {
         formatter: (val) => {
           val = val * 100 + "%";
           return val;
         },
-      }); // 度量变换
+      });
 
-      chart
-        .interval()
-        .position("percent") // 位置映射
-        .color("city") // 颜色映射
-        .label("percent", {
-          content: (data) => {
-            return `${data.city}: ${data.percent * 100}毫米`;
-          },
-        }) 
-
+      chart.interval()
+      .position("percent") // 位置映射
+      .color('city')
+      .label('percent', {
+        content: data => {
+          return `${data.city} : ${data.number}`
+        }
+      })
       chart.render();
     </script>
   </body>
