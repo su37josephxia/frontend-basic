@@ -19,11 +19,19 @@ const promise = (name, delay = 100) => new Promise(resolve => {
 })
 
 exports.promise = () => {
-
-    promise('Promise1')
-        .then(promise('Promise2'))
-        .then(promise('Promise3'))
-        .then(promise('Promise4'))
+    
+    promise('Promise1',600)
+        .then((res) => {
+            return promise('Promise2',500)
+        })
+        .then(
+            (res) => {
+                return promise('Promise3',100)
+            })
+        .then(
+            (res) => {
+                return promise('Promise4',200)
+            })
 }
 
 exports.generator = () => {
