@@ -966,8 +966,8 @@ has-unicode@^2.0.0:
   resolved "https://registry.npm.taobao.org/has-unicode/download/has-unicode-2.0.1.tgz#e0e6fe6a28cf51138855e086d1691e771de2a8b9"
 
 hosted-git-info@^2.1.4:
-  version "2.8.8"
-  resolved "https://registry.npm.taobao.org/hosted-git-info/download/hosted-git-info-2.8.8.tgz?cache=0&sync_timestamp=1583044512484&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhosted-git-info%2Fdownload%2Fhosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
 
 hot-import@^0.2.1:
   version "0.2.14"
